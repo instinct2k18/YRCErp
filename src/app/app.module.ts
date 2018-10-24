@@ -5,12 +5,26 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
+import { MastersComponent } from './components/masters/masters.component';
+import { AcademicYearComponent } from './components/masters/academic-year/academic-year.component';
+import { FinancialYearComponent } from './components/masters/financial-year/financial-year.component';
+import { UniversityComponent } from './components/masters/university/university.component';
+import { DistrictComponent } from './components/masters/district/district.component';
+import { CollegeComponent } from './components/masters/college/college.component';
+import { IncomeHeadsComponent } from './components/masters/income-heads/income-heads.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    HomeComponent
+    HomeComponent,
+    MastersComponent,
+    AcademicYearComponent,
+    FinancialYearComponent,
+    UniversityComponent,
+    DistrictComponent,
+    CollegeComponent,
+    IncomeHeadsComponent
   ],
   imports: [
     BrowserModule,
