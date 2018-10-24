@@ -12,6 +12,7 @@ import { UniversityComponent } from './components/masters/university/university.
 import { DistrictComponent } from './components/masters/district/district.component';
 import { CollegeComponent } from './components/masters/college/college.component';
 import { IncomeHeadsComponent } from './components/masters/income-heads/income-heads.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { IncomeHeadsComponent } from './components/masters/income-heads/income-h
     UniversityComponent,
     DistrictComponent,
     CollegeComponent,
-    IncomeHeadsComponent
+    IncomeHeadsComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
