@@ -1,9 +1,8 @@
-<app-navbar></app-navbar>
 <div class="container">
-  <form>
+  <form (submit)="onAddDistrict(districtForm)" #districtForm="ngForm">
     <div class="form-group">
-      <label for="">District Name</label>
-      <input type="text" class="form-control" id="" placeholder="">
+      <label for="district">District Name</label>
+      <input type="text" class="form-control" id="district" name="district_name" placeholder="Enter District" ngModel required>
     </div>
     <button type="submit" class="btn btn-primary">Add District</button>
   </form>

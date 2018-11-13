@@ -1,25 +1,24 @@
-<app-navbar></app-navbar>
 <div class="container">
-  <form>
+  <form (submit)="onAddUniversity(universityForm)" #universityForm="ngForm">
     <div class="form-group">
-      <label for="">University Name</label>
-      <input type="text" class="form-control" id="" placeholder="">
+      <label for="university">University Name</label>
+      <input type="text" class="form-control" id="university" name="university" placeholder="Enter University" ngModel required>
     </div>
     <div class="form-group">
-      <label for="">Address</label>
-      <textarea class="form-control" id="" rows="3"></textarea>
+      <label for="address">Address</label>
+      <textarea class="form-control" id="address" name="address" rows="3" ngModel required></textarea>
     </div>
     <div class="form-group">
-      <label for="">Nodal Officer</label>
-      <input type="text" class="form-control" id="" placeholder="">
+      <label for="nodal_officer">Nodal Officer</label>
+      <input type="text" class="form-control" id="nodal_officer" name="nodal_officer" placeholder="Enter Nodal Officer" ngModel required>
     </div>
     <div class="form-group">
-      <label for="">Contact Number</label>
-      <input type="text" class="form-control" id="" placeholder="">
+      <label for="u_contact_no">Contact Number</label>
+      <input type="text" class="form-control" id="u_contact_no" name="u_contact_no" placeholder="Enter Contact Number" ngModel required>
     </div>
     <div class="form-group">
-      <label for="">Email-address</label>
-      <input type="email" class="form-control" id="" placeholder="">
+      <label for="u_email">Email-address</label>
+      <input type="email" class="form-control" id="u_email" name="u_email" placeholder="Enter email" ngModel required>
     </div>
     <button type="submit" class="btn btn-primary">Add University</button>
   </form>

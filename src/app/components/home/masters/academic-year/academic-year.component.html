@@ -1,9 +1,8 @@
-<app-navbar></app-navbar>
 <div class="container">
-  <form>
+  <form (submit)="onAddAcademicYear(academicYearForm)" #academicYearForm="ngForm">
     <div class="form-group">
-      <label for="">Year</label>
-      <input type="text" class="form-control" id="" placeholder="">
+      <label for="academic">Year</label>
+      <input type="text" class="form-control" id="academic" name="academic_year" placeholder="Enter Year" ngModel required>
     </div>
     <button type="submit" class="btn btn-primary">Add Academic Year</button>
   </form>

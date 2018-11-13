@@ -1,13 +1,12 @@
-<app-navbar></app-navbar>
 <div class="container">
-  <form action="#">
+  <form (submit)="onLogin(adminForm)" #adminForm="ngForm">
     <div class="form-group">
       <label for="uname">Username:</label>
-      <input type="uname" class="form-control" id="uname">
+      <input type="uname" class="form-control" name="uname" id="uname" ngModel required>
     </div>
     <div class="form-group">
       <label for="pwd">Password:</label>
-      <input type="password" class="form-control" id="pwd">
+      <input type="password" class="form-control" name="pwd" id="pwd" ngModel required>
     </div>
     <div class="form-group form-check">
       <label class="form-check-label">

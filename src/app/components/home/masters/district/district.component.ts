@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { DistrictService } from './district.service';
+import { District } from './district.model';
 
 @Component({
   selector: 'app-district',
@@ -7,9 +10,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DistrictComponent implements OnInit {
 
-  constructor() { }
+  constructor(public districtService: DistrictService) { }
 
   ngOnInit() {
   }
 
+  onAddDistrict(form: NgForm) {
+    const district: District = { id: null, district_name: form.value.district_name };
+    this.districtService.addDistrict(district);
+  }
 }

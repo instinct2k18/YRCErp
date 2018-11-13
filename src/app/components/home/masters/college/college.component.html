@@ -1,41 +1,46 @@
-<app-navbar></app-navbar>
 <div class="container">
-  <form>
+  <form (submit)="onAddCollege(collegeForm)" #collegeForm="ngForm">
     <div class="form-group">
-      <label for="">YRC Registration Number</label>
-      <input type="text" class="form-control" id="" placeholder="">
+      <label for="yrc_reg_no">YRC Registration Number</label>
+      <input type="text" class="form-control" id="yrc_reg_no" name="yrc_reg_no" placeholder="Enter YRC Registration Number" ngModel required>
     </div>
     <div class="form-group">
-      <label for="">College Name</label>
-      <input type="text" class="form-control" id="" placeholder="">
+      <label for="college_name">College Name</label>
+      <input type="text" class="form-control" id="college_name" name="college_name" placeholder="Enter College Name" ngModel required>
     </div>
     <div class="form-group">
-      <label for="">Address</label>
-      <textarea class="form-control" id="" rows="3"></textarea>
+      <label for="c_address">Address</label>
+      <textarea class="form-control" id="c_address" name="c_address" rows="3" ngModel required></textarea>
     </div>
     <div class="form-group">
-      <label for="">Program Officer</label>
-      <input type="text" class="form-control" id="" placeholder="">
+      <label for="program_officer">Program Officer</label>
+      <input type="text" class="form-control" id="program_officer" name="program_officer" placeholder="Enter Program Officer name" ngModel required>
     </div>
     <div class="form-group">
-      <label for="">Contact Number</label>
-      <input type="text" class="form-control" id="" placeholder="">
+      <label for="c_contact_no">Contact Number</label>
+      <input type="text" class="form-control" id="c_contact_no" name="c_contact_no" placeholder="Enter Conntact number" ngModel required>
     </div>
     <div class="form-group">
-      <label for="">Email-address</label>
-      <input type="email" class="form-control" id="" placeholder="">
+      <label for="c_emai">Email-address</label>
+      <input type="email" class="form-control" id="c_email" name="c_email" placeholder="Enter email" ngModel required>
     </div>
     <div class="form-group">
-      <label for="">Registered Financial Year</label>
-      <input type="text" class="form-control" id="" placeholder="">
+      <label for="reg_fin_year">Registered Financial Year</label>
+      <select type="text" class="form-control" id="reg_fin_year" name="reg_fin_year" (change)="onSelectRegYear($event)" ngModel required>
+        <option *ngFor="let year of finYear" value="{{year.id}}">{{year.year}}</option>
+      </select>
     </div>
     <div class="form-group">
-      <label for="">Affiliation</label>
-      <input type="text" class="form-control" id="" placeholder="">
+      <label for="affiliation">Affiliation</label>
+      <select type="text" class="form-control" id="affiliation" name="affiliation" (change)="onSelectUniversity($event)" ngModel required>
+        <option *ngFor="let university of university" value="{{university.id}}">{{university.university}}</option>
+      </select>
     </div>
     <div class="form-group">
-      <label for="">District</label>
-      <input type="text" class="form-control" id="" placeholder="">
+      <label for="district">District</label>
+      <select type="text" class="form-control" id="district" name="district" (change)="onSelectDistrict($event)" ngModel required>
+        <option *ngFor="let district of district" value="{{district.id}}">{{district.district_name}}</option>
+      </select>
     </div>
     <button type="submit" class="btn btn-primary">Add College</button>
   </form>

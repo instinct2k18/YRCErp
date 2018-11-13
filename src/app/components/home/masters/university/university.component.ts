@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { University } from './university.model';
+import { UniversityService } from './university.service';
 
 @Component({
   selector: 'app-university',
@@ -7,9 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UniversityComponent implements OnInit {
 
-  constructor() { }
+  constructor(public universityService: UniversityService) { }
 
   ngOnInit() {
   }
 
+  onAddUniversity(form: NgForm) {
+    const university: University = {
+      id: null,
+      university: form.value.university,
+      address: form.value.address,
+      nodal_officer: form.value.nodal_officer,
+      contact_no: form.value.u_contact_no,
+      email: form.value.u_email
+    };
+    this.universityService.addUniversity(university);
+  }
 }
