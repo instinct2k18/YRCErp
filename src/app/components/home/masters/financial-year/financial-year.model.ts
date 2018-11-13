@@ -1,4 +1,4 @@
 export interface FinancialYear {
-  id: String;
-  year: String;
+  id: string;
+  year: string;
 }

@@ -1,8 +1,8 @@
 export interface University {
-  id: String;
-  university: String;
-  address: String;
-  nodal_officer: String;
-  contact_no: String;
-  email: String;
+  id: string;
+  university: string;
+  address: string;
+  nodal_officer: string;
+  contact_no: string;
+  email: string;
 }

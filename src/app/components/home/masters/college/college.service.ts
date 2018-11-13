@@ -15,7 +15,7 @@ export class CollegeService {
   constructor(private http: HttpClient) { }
 
   getCollege() {
-    this.http.get<{message: String; college: any}>('http://localhost:3000/api/college')
+    this.http.get<{message: string; college: any}>('http://localhost:3000/api/college')
       .pipe(map((collegeData) => {
         return collegeData.college.map(college => {
           return {
@@ -37,7 +37,7 @@ export class CollegeService {
   addCollege(college: College) {
     this.college.push(college);
     this.collegeSubject.next([...this.college]);
-    this.http.post<{message: String}>('http://localhost:3000/api/college', college)
+    this.http.post<{message: string}>('http://localhost:3000/api/college', college)
       .subscribe((resposnseData) => {
         console.log(resposnseData.message);
       });

@@ -15,7 +15,7 @@ export class DistrictService {
   constructor(private http: HttpClient) { }
 
   getDistrict() {
-    this.http.get<{message: String; district: any}>('http://localhost:3000/api/district')
+    this.http.get<{message: string; district: any}>('http://localhost:3000/api/district')
       .pipe(map((districtData) => {
         return districtData.district.map(district => {
           return {
@@ -37,7 +37,7 @@ export class DistrictService {
   addDistrict(district: District) {
     this.district.push(district);
     this.districtSubject.next([...this.district]);
-    this.http.post<{message: String}>('http://localhost:3000/api/district', district)
+    this.http.post<{message: string}>('http://localhost:3000/api/district', district)
       .subscribe((resposnseData) => {
         console.log(resposnseData.message);
       });

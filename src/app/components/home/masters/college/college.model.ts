@@ -1,11 +1,11 @@
 export interface College {
-  id: String;
-  yrc_reg_no: String;
-  college_name: String;
-  address: String;
-  program_officer: String;
-  contact_no: String;
-  email: String;
+  id: string;
+  yrc_reg_no: string;
+  college_name: string;
+  address: string;
+  program_officer: string;
+  contact_no: string;
+  email: string;
   registered_financial_year: {};
   affiliation: {};
   district: {};

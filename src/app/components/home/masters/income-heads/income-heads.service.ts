@@ -15,7 +15,7 @@ export class IncomeHeadsService {
   constructor(private http: HttpClient) { }
 
   getIncomeHeads() {
-    this.http.get<{message: String; incomeHeads: any}>('http://localhost:3000/api/income_heads')
+    this.http.get<{message: string; incomeHeads: any}>('http://localhost:3000/api/income_heads')
       .pipe(map((incomeHeadsData) => {
         return incomeHeadsData.incomeHeads.map(incomeHeads => {
           return {
@@ -37,7 +37,7 @@ export class IncomeHeadsService {
   addIncomeHeads(incomeHeads: IncomeHeads) {
     this.incomeHeads.push(incomeHeads);
     this.incomeHeadsSubject.next([...this.incomeHeads]);
-    this.http.post<{message: String}>('http://localhost:3000/api/income_heads', incomeHeads)
+    this.http.post<{message: string}>('http://localhost:3000/api/income_heads', incomeHeads)
       .subscribe((resposnseData) => {
         console.log(resposnseData.message);
       });

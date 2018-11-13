@@ -1,8 +1,8 @@
 export interface IncomeHeads {
-  id: String;
-  college_name: String;
-  college_registration_fee: String;
-  student_membership_fee: String;
-  academic_year: String;
-  financial_year: String;
+  id: string;
+  college_name: string;
+  college_registration_fee: string;
+  student_membership_fee: string;
+  academic_year: string;
+  financial_year: string;
 }

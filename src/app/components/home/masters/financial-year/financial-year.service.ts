@@ -17,7 +17,7 @@ export class FinancialYearService {
 
   getFinYear() {
     this.http
-      .get<{ message: String; finYear: any }>(
+      .get<{ message: string; finYear: any }>(
         'http://localhost:3000/api/financial_year'
       )
       .pipe(map((finYearData) => {
@@ -42,7 +42,7 @@ export class FinancialYearService {
     const financialYear: FinancialYear = { id: null, year: financial_year };
     this.finYear.push(financialYear);
     this.finYearSubject.next([...this.finYear]);
-    this.http.post<{message: String}>('http://localhost:3000/api/financial_year', financialYear)
+    this.http.post<{message: string}>('http://localhost:3000/api/financial_year', financialYear)
       .subscribe((resposnseData) => {
         console.log(resposnseData.message);
       });

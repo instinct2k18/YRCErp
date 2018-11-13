@@ -12,7 +12,7 @@ import { AuthData } from './auth-data.model';
 export class AuthService {
 
   private isAuthenticated = false;
-  private token: String;
+  private token: string;
   private tokenTimer: NodeJS.Timer;
   private authStatusListener = new Subject<boolean>();
 
@@ -30,7 +30,7 @@ export class AuthService {
     return this.authStatusListener.asObservable();
   }
 
-  createUser(username: String, password: String) {
+  createUser(username: string, password: string) {
     const authData: AuthData = { username: username, password: password };
     this.http.post('http://localhost:3000/api/user/create_user', authData)
       .subscribe(response => {
@@ -38,9 +38,9 @@ export class AuthService {
       });
   }
 
-  login(username: String, password: String) {
+  login(username: string, password: string) {
     const authData: AuthData = {username: username, password: password};
-    this.http.post<{token: String, expiresIn: number}>('http://localhost:3000/api/user/login', authData)
+    this.http.post<{token: string, expiresIn: number}>('http://localhost:3000/api/user/login', authData)
       .subscribe(response => {
         const token = response.token;
         this.token = token;
@@ -51,7 +51,7 @@ export class AuthService {
           this.authStatusListener.next(true);
           const currentDate = new Date();
           const expirationDate = new Date(currentDate.getTime() + expiresIn * 1000 );
-          this.saveAuthData(token.toString(), expirationDate);
+          this.saveAuthData(token, expirationDate);
           this.router.navigate(['/home']);
         }
       });

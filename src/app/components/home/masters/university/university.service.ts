@@ -14,7 +14,7 @@ export class UniversityService {
   constructor(private http: HttpClient) { }
 
   getUniversity() {
-    this.http.get<{message: String; university: any}>('http://localhost:3000/api/university')
+    this.http.get<{message: string; university: any}>('http://localhost:3000/api/university')
       .pipe(map((universityData) => {
         return universityData.university.map(university => {
           return {
@@ -40,7 +40,7 @@ export class UniversityService {
   addUniversity(university: University) {
     this.university.push(university);
     this.universitySubject.next([...this.university]);
-    this.http.post<{message: String}>('http://localhost:3000/api/university', university)
+    this.http.post<{message: string}>('http://localhost:3000/api/university', university)
       .subscribe((resposnseData) => {
         console.log(resposnseData.message);
       });
