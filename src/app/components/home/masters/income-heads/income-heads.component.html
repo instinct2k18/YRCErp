@@ -1,30 +1,8 @@
 <div class="container">
   <form (submit)="onAddIncomeHead(incomeHeadForm)" #incomeHeadForm = "ngForm">
     <div class="form-group">
-      <label for="i_college_name">College Name</label>
-      <select type="text" class="form-control" id="i_college_name" name="i_college_name" (change)="onSelectCollege($event)" ngModel required>
-        <option *ngFor="let college of college" value="{{college.id}}">{{college.college_name}}</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="col_reg_fee">College Registration Fee</label>
-      <input type="text" class="form-control" id="col_reg_fee" name="col_reg_fee" placeholder="Enter College Registration fee" ngModel required>
-    </div>
-    <div class="form-group">
-      <label for="std_fee">Student Membership Fee</label>
-      <input type="text" class="form-control" id="std_fee" name="std_fee" placeholder="Enter Student Registration fee" ngModel required>
-    </div>
-    <div class="form-group">
-      <label for="i_academic_year">Academic Year</label>
-      <select type="text" class="form-control" id="i_academic_year" name="i_academic_year" (change)="onSelectAcademicYear($event)" ngModel required>
-        <option *ngFor="let a_year of academicYear" value="{{a_year.id}}">{{a_year.year}}</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="i_fin_year">Financial Year</label>
-      <select type="text" class="form-control" id="i_fin_year" name="i_fin_year" (change)="onSelectFinancialYear($event)" ngModel required>
-        <option *ngFor="let f_year of finYear" value="{{f_year.id}}">{{f_year.year}}</option>
-      </select>
+      <label for="i_income_head">Income Head</label>
+      <input type="text" class="form-control" id="i_income_head" name="i_income_head" placeholder="Enter Income Head" ngModel required>
     </div>
     <button type="submit" class="btn btn-primary">Add Income Head</button>
   </form>

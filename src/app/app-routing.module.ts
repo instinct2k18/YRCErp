@@ -4,6 +4,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { IndexComponent } from './components/index/index.component';
 import { HomeComponent } from './components/home/home.component';
+import { TransactionsComponent } from './components/home/transactions/transactions.component';
+import { ReceiptsComponent } from './components/home/transactions/receipts/receipts.component';
+import { VoucherComponent } from './components/home/transactions/voucher/voucher.component';
+
 import { AdminComponent } from './components/auth/admin/admin.component';
 import { MastersComponent } from './components/home/masters/masters.component';
 import { ReportsComponent } from './components/home/reports/reports.component';
@@ -21,6 +25,9 @@ const routes: Routes = [
   {path: 'admin', component: AdminComponent},
   {path: 'masters', component: MastersComponent, canActivate: [AuthGuard] },
   {path: 'reports', component: ReportsComponent, canActivate: [AuthGuard] },
+  {path: 'transactions', component: TransactionsComponent, canActivate: [AuthGuard] },
+  {path: 'transactions/receipts', component: ReceiptsComponent, canActivate: [AuthGuard] },
+  {path: 'transactions/vouchers', component: VoucherComponent, canActivate: [AuthGuard] },
   {path: 'masters/academic_year', component: AcademicYearComponent, canActivate: [AuthGuard] },
   {path: 'masters/college', component: CollegeComponent, canActivate: [AuthGuard] },
   {path: 'masters/district', component: DistrictComponent, canActivate: [AuthGuard] },
@@ -49,5 +56,8 @@ export const ModulesList = [
   CollegeComponent,
   IncomeHeadsComponent,
   AdminComponent,
-  ReportsComponent
+  ReportsComponent,
+  TransactionsComponent,
+  ReceiptsComponent,
+  VoucherComponent
 ];

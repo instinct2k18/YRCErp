@@ -15,12 +15,12 @@ export class IncomeHeadsService {
   constructor(private http: HttpClient) { }
 
   getIncomeHeads() {
-    this.http.get<{message: string; incomeHeads: any}>('http://localhost:3000/api/income_heads')
+    this.http.get<{message: string; incomeHead: any}>('http://localhost:3000/api/income_heads')
       .pipe(map((incomeHeadsData) => {
-        return incomeHeadsData.incomeHeads.map(incomeHeads => {
+        return incomeHeadsData.incomeHead.map(incomeHeads => {
           return {
             id: incomeHeads._id,
-            incomeHeads_name: incomeHeads.incomeHeads_name
+            income_head: incomeHeads.income_head
           };
         });
       }))
