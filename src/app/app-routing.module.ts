@@ -20,9 +20,8 @@ import { UniversityComponent } from './components/home/masters/university/univer
 import { AuthGuard } from './components/auth/auth.guard';
 
 const routes: Routes = [
-  {path: '', component: IndexComponent},
+  {path: '', component: AdminComponent},
   {path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
-  {path: 'admin', component: AdminComponent},
   {path: 'masters', component: MastersComponent, canActivate: [AuthGuard] },
   {path: 'reports', component: ReportsComponent, canActivate: [AuthGuard] },
   {path: 'transactions', component: TransactionsComponent, canActivate: [AuthGuard] },
