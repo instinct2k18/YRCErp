@@ -1,6 +1,41 @@
 <div class="container">
   <form (submit)="onAddVoucher(voucherForm)" #voucherForm="ngForm">
+    <div class="form-group">
+      <label for="voucher_no">Voucher Number</label>
+      <input type="text" class="form-control" id="voucher_no" name="voucher_no" placeholder="Enter Voucher Number" ngModel required>
+    </div>
 
+    <div class="form-group">
+      <label for="v_clg_name">College Name</label>
+      <select type="text" class="form-control" id="v_clg_name" name="v_clg_name" (change)="onSelectCollege($event)" ngModel required>
+        <option *ngFor="let name of college" value="{{name.id}}">{{name.college_name}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="v_income_head">Income Head</label>
+      <select type="text" class="form-control" id="v_income_head" name="v_income_head" (change)="onSelectIncomeHead($event)" ngModel required>
+        <option *ngFor="let ih of incomeHead" value="{{ih.id}}">{{ih.income_head}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="voucher_no">Fee</label>
+      <input type="text" class="form-control" id="v_fee" name="v_fee" placeholder="Enter Fees" ngModel required>
+    </div>
+
+    <div class="form-group">
+      <label for="v_fin_year">Financial Year</label>
+      <select type="text" class="form-control" id="v_fin_year" name="v_fin_year" (change)="onSelectFinYear($event)" ngModel required>
+        <option *ngFor="let year of finYear" value="{{year.id}}">{{year.year}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="v_ac_year">Academic Year</label>
+      <select type="text" class="form-control" id="v_ac_year" name="v_ac_year" (change)="onSelectAcYear($event)" ngModel required>
+        <option *ngFor="let year of acYear" value="{{year.id}}">{{year.year}}</option>
+      </select>
+    </div>
     <button type="submit" class="btn btn-primary">Add Voucher</button>
   </form>
 </div>
