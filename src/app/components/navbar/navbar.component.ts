@@ -10,17 +10,17 @@ import { AuthService } from '../auth/auth.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit, OnDestroy {
-  userIsAuthenticated = false;
+  userIsAuthenticated = true;
   private authListenerSubs: Subscription;
 
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
-    this.userIsAuthenticated = this.authService.getIsAuth();
-    this.authListenerSubs = this.authService.getAuthStatusListener()
-      .subscribe(isAuthenticated => {
-        this.userIsAuthenticated = isAuthenticated;
-      });
+    // this.userIsAuthenticated = this.authService.getIsAuth();
+    // this.authListenerSubs = this.authService.getAuthStatusListener()
+    //   .subscribe(isAuthenticated => {
+    //     this.userIsAuthenticated = isAuthenticated;
+    //   });
   }
 
   onLogout() {

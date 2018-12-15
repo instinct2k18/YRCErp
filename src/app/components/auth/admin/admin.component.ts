@@ -18,6 +18,6 @@ export class AdminComponent implements OnInit {
     if (form.invalid) {
       return;
     }
-    this.authService.login(form.value.uname, form.value.pwd);
+    this.authService.login(form.value.username, form.value.password);
   }
 }
