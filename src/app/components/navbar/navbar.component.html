@@ -1,8 +1,7 @@
 <header class="blog-header py-3">
   <div class="row flex-nowrap justify-content-between align-items-center">
     <div class="col-4 text-center">
-      <a class="blog-header-logo text-danger" [routerLink]="['']" routerLinkActive="router-link-active">Indian Red
-        Cross</a>
+      <a class="blog-header-logo text-danger" [routerLink]="['']" routerLinkActive="router-link-active">Youth Red Cross</a>
     </div>
     <div class="col-4 d-flex justify-content-end align-items-center">
       <a class="btn btn-sm btn-outline-danger" [routerLink]="['']" routerLinkActive="router-link-active" *ngIf="userIsAuthenticated">Logout</a>
@@ -10,7 +9,7 @@
   </div>
 </header>
 
-<div class="nav-scroller py-1 mb-2" *ngIf="userIsAuthenticated; else login">
+<!-- <div class="nav-scroller py-1 mb-2" *ngIf="userIsAuthenticated; else login">
   <nav class="nav d-flex justify-content-between">
     <a class="p-2 text-muted" [routerLink]="['/home']" routerLinkActive="router-link-active" >Home</a>
     <a class="p-2 text-muted" [routerLink]="['/adduniversity']" routerLinkActive="router-link-active" >Add University</a>
@@ -23,4 +22,51 @@
   <div class="nav-scroller py-1 mb-2 mt-2 text-center">
     <p class="p-2 text-danger">Login to get Started</p>
   </div>
-</ng-template>
+</ng-template> -->
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <div ngbDropdown class="d-inline-block">
+          <a class="nav-link" id="dropdownBasic1" href="#"  onclick="return false;" ngbDropdownToggle>Masters</a>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <a class="dropdown-item"routerLink="/masters/academic_year">Create Academic Year</a>
+            <a class="dropdown-item" routerLink="/masters/financial_year">Create Financial Year</a>
+            <a class="dropdown-item" routerLink="/masters/district">Create District</a>
+            <a class="dropdown-item" routerLink="/masters/university">Create University</a>
+            <a class="dropdown-item" routerLink="/masters/college">Create College</a>
+            <a class="dropdown-item" routerLink="/masters/income_heads">Create Income Heads</a>
+          </div>
+        </div>
+      </li>
+      <li class="nav-item">
+        <div ngbDropdown class="d-inline-block">
+          <a class="nav-link" id="dropdownBasic1" href="#"  onclick="return false;" ngbDropdownToggle>Reports</a>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <a class="dropdown-item">Action - 1</a>
+            <a class="dropdown-item">Another Action</a>
+            <a class="dropdown-item">Something else is here</a>
+          </div>
+        </div>
+      </li>
+      <li class="nav-item">
+        <div ngbDropdown class="d-inline-block">
+          <a class="nav-link" id="dropdownBasic1" href="#"  onclick="return false;" ngbDropdownToggle>Transactions</a>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+              <a class="dropdown-item" routerLink="/transactions/receipts">Add new receipt</a>
+              <a class="dropdown-item" routerLink="/transactions/vouchers">Add new voucher</a>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
+
