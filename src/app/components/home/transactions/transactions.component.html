@@ -1,21 +1,30 @@
 <div class="jumbotron">
-  <h1 class="display-3">Jumbo heading</h1>
-  <p class="lead">Jumbo helper text</p>
+  <h1 class="display-3">Transactions</h1>
   <hr class="my-2">
   <div class="row">
     <div class="col-sm-6 col-md-6">
       <div class="card">
         <div class="card-body">
-          <h3 class="card-title">Add A New receipt</h3>
-          <p class="card-text"><a routerLink="/transactions/receipts" class="btn btn-primary">Click here to add</a></p>
+          <a routerLink="/transactions/receipts" routerLinkActive="active" id="act">
+            <div>
+              <img src="../../../../assets/icon/create (2).png" alt="RECIEPT" id="ico">
+              <br><br>
+              <span class="card-title">Add a new <b>R</b>eciept</span>
+            </div>
+          </a>
         </div>
       </div>
     </div>
     <div class="col-sm-6 col-md-6">
       <div class="card">
         <div class="card-body">
-          <h3 class="card-title">Add a new voucher</h3>
-          <a routerLink="/transactions/vouchers" class="btn btn-primary">Click here to add</a>
+          <a routerLink="/transactions/vouchers" routerLinkActive="active" id="act">
+            <div>
+              <img src="../../../../assets/icon/report (2).png" alt="VOUCHER" id="ico">
+              <br><br>
+              <span class="card-title">Add a new <b>V</b>oucher</span>
+            </div>
+          </a>
         </div>
       </div>
     </div>
