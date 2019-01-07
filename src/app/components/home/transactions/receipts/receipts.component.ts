@@ -59,12 +59,6 @@ export class ReceiptsComponent implements OnInit, OnDestroy {
         this.acYear = acYear;
       });
   }
-  ngOnDestroy() {
-    this.collegeSub.unsubscribe();
-    this.finYearSub.unsubscribe();
-    this.acYearSub.unsubscribe();
-    this.receiptSub.unsubscribe();
-  }
 
   onSelectCollege(event) {
     this.collegeId = event.target['value'];
@@ -81,8 +75,19 @@ export class ReceiptsComponent implements OnInit, OnDestroy {
   onGenerateReceipt(form: NgForm) {
     this.receiptService.generateReceipt(this.collegeId, this.acYearId, this.finYearId);
     this.receiptSub = this.receiptService.getReceiptsUpdatedListener()
-      .subscribe((receipt) => {
-        this.receipts = receipt;
+    .subscribe((receipt) => {
+      this.receipts = receipt;
       });
   }
+
+  ngOnDestroy() {
+    this.collegeSub.unsubscribe();
+    this.finYearSub.unsubscribe();
+    this.acYearSub.unsubscribe();
+    if (this.receiptSub) {
+      this.receiptSub.unsubscribe();
+    }
+  }
 }
+
+

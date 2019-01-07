@@ -52,7 +52,7 @@ export class AuthService {
           const currentDate = new Date();
           const expirationDate = new Date(currentDate.getTime() + expiresIn * 1000 );
           this.saveAuthData(token, expirationDate);
-          alert("Logged in successfully");
+          alert('Logged in successfully');
           this.router.navigate(['/home']);
         }
       });
@@ -70,9 +70,9 @@ export class AuthService {
       this.isAuthenticated = true;
       this.setAuthTimer(expiresIn / 1000);
       this.authStatusListener.next(true);
-      //EXP
+      // exp
       this.router.navigate(['/home']);
-      //EXP
+      // exp
 
 
     }
