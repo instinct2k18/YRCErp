@@ -20,7 +20,15 @@ export class CollegeService {
         return collegeData.college.map(college => {
           return {
             id: college._id,
-            college_name: college.college_name
+            college_name: college.college_name,
+            yrc_reg_no: college.yrc_reg_no,
+            address: college.address,
+            program_officer: college.program_officer,
+            contact_no: college.contact_no,
+            email: college.email,
+            registered_financial_year: college.registered_financial_year,
+            affiliation: college.affiliation,
+            district: college.district
           };
         });
       }))
