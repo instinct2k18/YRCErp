@@ -8,6 +8,8 @@ import { NgForm } from '@angular/forms';
 })
 export class FinancialYearComponent implements OnInit {
 
+  added = false;
+
   constructor(public financialYearService: FinancialYearService) { }
 
   ngOnInit() {
@@ -15,5 +17,7 @@ export class FinancialYearComponent implements OnInit {
 
   onAddFinancialYear(form: NgForm) {
     this.financialYearService.addFinancialYear(form.value.financial_year);
+    this.added = true;
+    form.reset();
   }
 }

@@ -10,6 +10,8 @@ import { District } from './district.model';
 })
 export class DistrictComponent implements OnInit {
 
+  added = false;
+
   constructor(public districtService: DistrictService) { }
 
   ngOnInit() {
@@ -18,5 +20,7 @@ export class DistrictComponent implements OnInit {
   onAddDistrict(form: NgForm) {
     const district: District = { id: null, district_name: form.value.district_name };
     this.districtService.addDistrict(district);
+    this.added = true;
+    form.reset();
   }
 }

@@ -110,16 +110,18 @@ export class DistrictWiseComponent implements OnInit , OnDestroy {
 
   onSelectDistrict(event) {
     this.districtId = event.target['value'];
+    console.log(this.districtId);
     this.college = [];
     this.collegeService.getCollege();
     this.collegeSub = this.collegeService.getCollegeUpdatedListener()
       .subscribe((clg) => {
         clg.map((c) => {
           if (c.district === this.districtId) {
-            this.college = clg;
+            this.college.push(c);
           }
         });
       });
+      console.log(this.college);
     this.distFlag = true;
   }
 

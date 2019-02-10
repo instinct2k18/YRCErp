@@ -5,5 +5,11 @@
       <input type="text" class="form-control" id="district" name="district_name" placeholder="Enter District" ngModel required>
     </div>
     <button type="submit" class="btn btn-primary">Add District</button>
+    <div *ngIf="added" class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 10px">
+        Added successfully.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
   </form>
 </div>

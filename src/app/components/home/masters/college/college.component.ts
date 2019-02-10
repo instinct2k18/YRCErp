@@ -18,6 +18,7 @@ import { College } from './college.model';
 })
 export class CollegeComponent implements OnInit, OnDestroy {
 
+  added = false;
   regYearId = null;
   universityId = null;
   districtId = null;
@@ -77,6 +78,8 @@ export class CollegeComponent implements OnInit, OnDestroy {
 
     };
     this.collegeService.addCollege(college);
+    this.added = true;
+    form.reset();
   }
 
   onSelectRegYear(event) {

@@ -20,6 +20,7 @@ import { VoucherService } from './voucher.service';
 })
 export class VoucherComponent implements OnInit, OnDestroy {
 
+  added = false;
   collegeId = null;
   incomeHeadId = null;
   finYearId = null;
@@ -81,6 +82,8 @@ export class VoucherComponent implements OnInit, OnDestroy {
       academic_year: this.acYearId
     };
     this.voucherService.addVoucher(voucher);
+    this.added = true;
+    form.reset();
   }
 
   ngOnDestroy() {

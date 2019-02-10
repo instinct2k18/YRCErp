@@ -10,6 +10,8 @@ import { UniversityService } from './university.service';
 })
 export class UniversityComponent implements OnInit {
 
+  added = false;
+
   constructor(public universityService: UniversityService) { }
 
   ngOnInit() {
@@ -25,5 +27,7 @@ export class UniversityComponent implements OnInit {
       email: form.value.u_email
     };
     this.universityService.addUniversity(university);
+    this.added = true;
+    form.reset();
   }
 }

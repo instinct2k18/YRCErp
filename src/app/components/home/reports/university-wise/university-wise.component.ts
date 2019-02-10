@@ -116,7 +116,7 @@ export class UniversityWiseComponent implements OnInit , OnDestroy {
       .subscribe((clg) => {
         clg.map((c) => {
           if (c.affiliation === this.universityId) {
-            this.college = clg;
+            this.college.push(c);
           }
         });
       });

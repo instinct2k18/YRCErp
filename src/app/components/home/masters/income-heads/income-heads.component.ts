@@ -14,6 +14,7 @@ import { IncomeHeads } from './income-heads.model';
 })
 export class IncomeHeadsComponent implements OnInit, OnDestroy {
 
+  added = false;
   incomeHead: IncomeHeads[] = [];
   private incomeHeadSub: Subscription;
 
@@ -38,6 +39,8 @@ export class IncomeHeadsComponent implements OnInit, OnDestroy {
       income_head: form.value.i_income_head
     };
     this.incomeService.addIncomeHeads(income);
+    this.added = true;
+    form.reset();
   }
 
 }

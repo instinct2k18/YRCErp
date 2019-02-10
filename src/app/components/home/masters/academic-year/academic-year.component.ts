@@ -10,6 +10,8 @@ import { AcademicYearService } from './academic-year.service';
 })
 export class AcademicYearComponent implements OnInit {
 
+  added = false;
+
   constructor(public academicYearService: AcademicYearService) {  }
 
   ngOnInit() {
@@ -18,5 +20,7 @@ export class AcademicYearComponent implements OnInit {
   onAddAcademicYear(form: NgForm) {
     const academicYear: AcademicYear = { id: null, year: form.value.academic_year };
     this.academicYearService.addAcademicYear(academicYear);
+    this.added = true;
+    form.reset();
   }
 }
