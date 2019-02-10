@@ -16,6 +16,7 @@ import { AcademicYearService } from '../../masters/academic-year/academic-year.s
 import * as jsPdf from 'jspdf';
 import { IncomeHeads } from '../../masters/income-heads/income-heads.model';
 import { IncomeHeadsService } from '../../masters/income-heads/income-heads.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-district-wise',
@@ -65,7 +66,8 @@ export class DistrictWiseComponent implements OnInit , OnDestroy {
     public voucherService: VoucherService,
     public finYearService: FinancialYearService,
     public acYearService: AcademicYearService,
-    public incHeadService: IncomeHeadsService
+    public incHeadService: IncomeHeadsService,
+    public router: Router
   ) { }
 
   ngOnInit() {
@@ -181,14 +183,34 @@ export class DistrictWiseComponent implements OnInit , OnDestroy {
     doc.text('General Secretary', 10, 180);
 
     doc.save(form.value.v_clg_name + '-' + form.value.v_ac_year + '.pdf');
+
+    this.router.navigateByUrl('reports', {skipLocationChange: true})
+      .then(() => this.router.navigate(['reports/district-wise']));
+  }
+
+  reset() {
+    this.router.navigateByUrl('reports', {skipLocationChange: true})
+      .then(() => this.router.navigate(['reports/district-wise']));
   }
 
   ngOnDestroy() {
-    this.districtSub.unsubscribe();
-    this.collegeSub.unsubscribe();
-    this.voucherSub.unsubscribe();
-    this.incHeadSub.unsubscribe();
-    this.acYearSub.unsubscribe();
-    this.finYearSub.unsubscribe();
+    if (this.districtSub) {
+      this.districtSub.unsubscribe();
+    }
+    if (this.collegeSub) {
+      this.collegeSub.unsubscribe();
+    }
+    if (this.voucherSub) {
+      this.voucherSub.unsubscribe();
+    }
+    if (this.incHeadSub) {
+      this.incHeadSub.unsubscribe();
+    }
+    if (this.acYearSub) {
+      this.acYearSub.unsubscribe();
+    }
+    if (this.finYearSub) {
+      this.finYearSub.unsubscribe();
+    }
   }
 }

@@ -1,0 +1,10 @@
+<div class="container">
+  <form>
+    <div class="form-group">
+      <label for="district">District</label>
+      <select type="text" class="form-control" id="district" name="district" (change)="onSelectDistrict($event)" ngModel required>
+        <option *ngFor="let district of district" value="{{district.id}}">{{district.district_name}}</option>
+      </select>
+    </div>
+  </form>
+</div>

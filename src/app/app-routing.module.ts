@@ -22,6 +22,8 @@ import { UniversityComponent } from './components/home/masters/university/univer
 import { UniversityWiseComponent } from './components/home/reports/university-wise/university-wise.component';
 import { DistrictWiseComponent } from './components/home/reports/district-wise/district-wise.component';
 
+import { CollectionsComponent } from './components/home/collections/collections.component';
+
 import { AuthGuard } from './components/auth/auth.guard';
 
 const routes: Routes = [
@@ -29,6 +31,7 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   {path: 'masters', component: MastersComponent, canActivate: [AuthGuard] },
   {path: 'reports', component: ReportsComponent, canActivate: [AuthGuard] },
+  {path: 'collections', component: CollectionsComponent, canActivate: [AuthGuard] },
   {path: 'transactions', component: TransactionsComponent, canActivate: [AuthGuard] },
   {path: 'transactions/receipts', component: ReceiptsComponent, canActivate: [AuthGuard] },
   {path: 'transactions/vouchers', component: VoucherComponent, canActivate: [AuthGuard] },
@@ -67,5 +70,6 @@ export const ModulesList = [
   ReceiptsComponent,
   VoucherComponent,
   DistrictWiseComponent,
-  UniversityWiseComponent
+  UniversityWiseComponent,
+  CollectionsComponent
 ];
