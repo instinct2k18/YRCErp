@@ -1,11 +1,25 @@
 <div class="container">
   <form (submit)="onGenerateReceipt(receiptForm)" #receiptForm="ngForm">
+      <div class="form-group">
+        <label for="r_no">Receipt Number</label>
+        <input type="text" class="form-control" id="r_no" name="r_no" placeholder="Enter Receipt Number" ngModel required>
+      </div>
+      <div class="form-group">
+        <label for="r_date">Receipt Enclosed Date</label>
+        <input type="text" class="form-control" id="r_date" name="r_date" placeholder="Enter receipt enclosed date" ngModel required>
+      </div>
     <div class="form-group">
       <label for="v_clg_name">College Name</label>
       <select type="text" class="form-control" id="v_clg_name" name="v_clg_name" (change)="onSelectCollege($event)" ngModel required>
         <option *ngFor="let name of college" value="{{name.id}}">{{name.college_name}}</option>
       </select>
     </div>
+    <div class="form-group">
+        <label for="v_inc_hd">Income Head</label>
+        <select type="text" class="form-control" id="v_inc_hd" name="v_inc_hd" (change)="onSelectIncomeHead($event)" ngModel required>
+            <option *ngFor="let ih of incHead" value="{{ih.id}}">{{ih.income_head}}</option>
+        </select>
+      </div>
     <div class="form-group">
         <label for="v_fin_year">Financial Year</label>
         <select type="text" class="form-control" id="v_fin_year" name="v_fin_year" (change)="onSelectFinYear($event)" ngModel required>
@@ -18,10 +32,17 @@
           <option *ngFor="let ayear of acYear" value="{{ayear.id}}">{{ayear.year}}</option>
         </select>
       </div>
+      <div class="form-group custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="notFirst" [checked]="notFirst" (change)="notFirst = !notFirst">
+          <label class="custom-control-label" for="notFirst">Check this if you are generating same receipt for 2nd time.</label>
+        </div>
     <button type="submit" class="btn btn-primary">Generate Receipt</button>
   </form>
   <div *ngIf="receipts" id="toPdf">
     <div *ngFor="let receipt of receipts">
+      <p>{{receipt.bank_details}}</p>
+      <p>{{receipt.received_date}}</p>
+      <p>{{receipt.student_count}}</p>
       <p>{{receipt.clg_name}}</p>
       <p>{{receipt.address}}</p>
       <p>{{receipt.fees}}</p>

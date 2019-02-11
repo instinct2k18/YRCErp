@@ -19,15 +19,22 @@ export class ReceiptsService {
     return this.receiptsSubject.asObservable();
   }
 
-  generateReceipt(clgId, acYearId, fnYearId) {
-    const url = 'http://localhost:3000/api/receipts?clgId=' + clgId + '&acYearId=' + acYearId + '&fnYearId=' + fnYearId;
+  generateReceipt(recptNo, recptEncDate, clgId, acYearId, fnYearId, incHdId, notFirst) {
+    const url = 'http://localhost:3000/api/receipts?' +
+    'recptNo=' + recptNo + '&recptEncDate=' + recptEncDate + '&clgId=' + clgId +
+    '&acYearId=' + acYearId + '&fnYearId=' + fnYearId + '&incHdId=' + incHdId + '&notFirst=' + notFirst;
     this.http.get<{message: string; data: any}>(url)
       .pipe(map((receiptData) => {
         return receiptData.data.map(receipt => {
           return {
+
             clg_name: receipt.c_name,
             address: receipt.addr,
-            fees: receipt.fees
+            fees: receipt.fees,
+            income_head: receipt.income_head,
+            received_date: receipt.received_date,
+            bank_details: receipt.bank_details,
+            student_count: receipt.student_count
           };
         });
       }))

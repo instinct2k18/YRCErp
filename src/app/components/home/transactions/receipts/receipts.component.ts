@@ -9,6 +9,8 @@ import { FinancialYear } from '../../masters/financial-year/financial-year.model
 import { AcademicYear } from '../../masters/academic-year/academic-year.model';
 import { ReceiptsService } from './receipts.service';
 import { Receipts } from './receipts.model';
+import { IncomeHeads } from '../../masters/income-heads/income-heads.model';
+import { IncomeHeadsService } from '../../masters/income-heads/income-heads.service';
 
 @Component({
   selector: 'app-receipts',
@@ -20,6 +22,8 @@ export class ReceiptsComponent implements OnInit, OnDestroy {
   collegeId = null;
   finYearId = null;
   acYearId = null;
+  incHeadId = null;
+  notFirst = false;
 
   college: College[] = [];
   private collegeSub: Subscription;
@@ -33,11 +37,15 @@ export class ReceiptsComponent implements OnInit, OnDestroy {
   receipts: Receipts[] = [];
   private receiptSub: Subscription;
 
+  incHead: IncomeHeads[] = [];
+  private incHeadSub: Subscription;
+
   constructor(
     public collegeService: CollegeService,
     public finYearService: FinancialYearService,
     public acYearService: AcademicYearService,
-    public receiptService: ReceiptsService
+    public receiptService: ReceiptsService,
+    public incHeadService: IncomeHeadsService
   ) { }
 
   ngOnInit() {
@@ -58,6 +66,12 @@ export class ReceiptsComponent implements OnInit, OnDestroy {
       .subscribe((acYear) => {
         this.acYear = acYear;
       });
+
+    this.incHeadService.getIncomeHeads();
+    this.incHeadSub = this.incHeadService.getIncomeHeadsUpdatedListener()
+      .subscribe((incHead) => {
+        this.incHead = incHead;
+      });
   }
 
   onSelectCollege(event) {
@@ -72,8 +86,14 @@ export class ReceiptsComponent implements OnInit, OnDestroy {
     this.acYearId = event.target['value'];
   }
 
+  onSelectIncomeHead(event) {
+    this.incHeadId = event.target['value'];
+  }
+
   onGenerateReceipt(form: NgForm) {
-    this.receiptService.generateReceipt(this.collegeId, this.acYearId, this.finYearId);
+    this.receiptService.generateReceipt(
+      form.value.r_no, form.value.r_date, this.collegeId, this.acYearId, this.finYearId, this.incHeadId, this.notFirst
+      );
     this.receiptSub = this.receiptService.getReceiptsUpdatedListener()
     .subscribe((receipt) => {
       this.receipts = receipt;

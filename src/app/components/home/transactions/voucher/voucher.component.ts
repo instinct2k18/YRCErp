@@ -79,7 +79,10 @@ export class VoucherComponent implements OnInit, OnDestroy {
       income_head: this.incomeHeadId,
       fee: form.value.v_fee,
       financial_year: this.finYearId,
-      academic_year: this.acYearId
+      academic_year: this.acYearId,
+      received_date: form.value.v_recv_date,
+      bank_details: form.value.v_bank,
+      student_count: form.value.v_std_cnt
     };
     this.voucherService.addVoucher(voucher);
     this.added = true;

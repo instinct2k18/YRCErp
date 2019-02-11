@@ -34,16 +34,20 @@
       </div>
     </ng-template>
     <div *ngIf="acFlag" class="form-check form-group form-check-inline">
-      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="form1" checked="checked">
+      <input class="form-check-input" type="radio" name="formtype" id="inlineRadio1" value="form1" (change)="onSelectFormType($event)">
       <label class="form-check-label" for="inlineRadio1">Form Type 1</label>
     </div>
     <div *ngIf="acFlag" class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="form2">
+      <input class="form-check-input" type="radio" name="formtype" id="inlineRadio2" value="form2" (change)="onSelectFormType($event)">
       <label class="form-check-label" for="inlineRadio2">Form Type 2</label>
     </div>
     <div *ngIf="acFlag" class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="form3">
+      <input class="form-check-input" type="radio" name="formtype" id="inlineRadio3" value="form3" (change)="onSelectFormType($event)">
       <label class="form-check-label" for="inlineRadio3">Form Type 3</label>
+    </div>
+    <div *ngIf="acFlag" class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="formtype" id="inlineRadio4" value="form4" (change)="onSelectFormType($event)">
+      <label class="form-check-label" for="inlineRadio4">Form Type 4</label>
     </div>
     <div *ngIf="acFlag" class="form-check form-check-inline">
       <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="form4">

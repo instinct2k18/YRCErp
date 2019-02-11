@@ -32,7 +32,7 @@ export class UniversityWiseComponent implements OnInit , OnDestroy {
   iHFlag = false;
 
   clgAddr = null;
-
+  formType = null;
   universityId = null;
   collegeId = null;
   voucherId = null;
@@ -152,6 +152,9 @@ export class UniversityWiseComponent implements OnInit , OnDestroy {
         });
       }
     });
+  }
+  onSelectFormType(event) {
+    this.formType = event.target['value'];
   }
 
   onGenerateForm(form: NgForm) {

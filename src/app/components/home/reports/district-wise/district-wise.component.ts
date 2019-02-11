@@ -32,7 +32,7 @@ export class DistrictWiseComponent implements OnInit , OnDestroy {
   iHFlag = false;
 
   clgAddr = null;
-
+  formType = null;
   districtId = null;
   collegeId = null;
   voucherId = null;
@@ -59,6 +59,9 @@ export class DistrictWiseComponent implements OnInit , OnDestroy {
   private incHeadSub: Subscription;
 
   iHList = [];
+
+  paid = false;
+  notPaid = false;
 
   constructor(
     public districtService: DistrictService,
@@ -140,6 +143,18 @@ export class DistrictWiseComponent implements OnInit , OnDestroy {
     this.acYearId = event.target['value'];
     this.acFlag = true;
     this.voucher.forEach((v) => {
+      if (v.college_name === this.collegeId) {
+        this.incHead.forEach((ih) => {
+          if (v.income_head === ih.id && ih.income_head.toLowerCase() === 'college registration fee') {
+            console.log('college has paid registration fee');
+            this.paid = true;
+            this.notPaid = false;
+          } else {
+            console.log('college has not paid registration fee');
+            this.notPaid = true;
+          }
+        });
+      }
       if (v.college_name === this.collegeId && v.financial_year === this.finYearId && v.academic_year === this.acYearId) {
         this.college.forEach((clg) => {
           if (clg.id === this.collegeId) {
@@ -156,38 +171,68 @@ export class DistrictWiseComponent implements OnInit , OnDestroy {
     });
   }
 
+  onSelectFormType(event) {
+    this.formType = event.target['value'];
+  }
+
   onGenerateForm(form: NgForm) {
-    const doc = new jsPdf();
-    // Header Part
-    doc.text('The Principal', 10, 10);
-    doc.text(form.value.v_clg_name, 10, 20);
-    doc.text(this.clgAddr, 10, 30);
+    // received date, fee amount, voucher number, receipt number, receipt enclosed date, college name & address
+    // if student reg fee then student count
 
-    // Letter
-    doc.text('Dear Sir / Madam', 10, 50);
+    if (this.paid === true) {
+      console.log('*********registration fee paid*********');
+    } else {
+      console.log('*********registration fee not paid*********');
+    }
 
-    doc.text('Sub:-Registration of Youth Red Cross', 10, 60);
-    doc.text('Ref:-Your Letter No:Nil Dt: Nil', 10, 70);
-    doc.text('***********', 10, 80);
+    if (this.formType === 'form1') {
 
-    doc.text('We acknowledge with thanks the receipt of Bank Draft/ChequeNo:151840', 10, 100);
-    doc.text('Dtd: 16/11/18, Bank of  Baroda, New BEL Road, Bangalore  for Rs.1,500/-', 10, 110);
-    doc.text('(Rupees One Thousand Five Hundred  Only) towards onetime payment of College Registration.', 10, 120);
+      console.log('form1 selected');
 
-    doc.text('Receipt No: 7849  Dtd: 27/11/2018 for Rs.1,500/- is enclosed.', 10, 130);
+    } else if (this.formType === 'form2') {
 
-    doc.text('Participation of students in Red Cross activities promotes understanding ', 10, 140);
-    doc.text('and accepting of civic responsibility and maintaining a spirit of friendliness.', 10, 150);
+      console.log('form2 selected');
 
-    doc.text('Thanking you,', 10, 160);
+    } else if (this.formType === 'form3') {
 
-    doc.text('Yours truly,', 10, 170);
-    doc.text('General Secretary', 10, 180);
+      console.log('form3 selected');
 
-    doc.save(form.value.v_clg_name + '-' + form.value.v_ac_year + '.pdf');
+    } else if (this.formType === 'form4') {
 
-    this.router.navigateByUrl('reports', {skipLocationChange: true})
-      .then(() => this.router.navigate(['reports/district-wise']));
+      console.log('form4 selected');
+
+    }
+    // const doc = new jsPdf();
+    // // Header Part
+    // doc.text('The Principal', 10, 10);
+    // doc.text(form.value.v_clg_name, 10, 20);
+    // doc.text(this.clgAddr, 10, 30);
+
+    // // Letter
+    // doc.text('Dear Sir / Madam', 10, 50);
+
+    // doc.text('Sub:-Registration of Youth Red Cross', 10, 60);
+    // doc.text('Ref:-Your Letter No:Nil Dt: Nil', 10, 70);
+    // doc.text('***********', 10, 80);
+
+    // doc.text('We acknowledge with thanks the receipt of Bank Draft/ChequeNo:151840', 10, 100);
+    // doc.text('Dtd: 16/11/18, Bank of  Baroda, New BEL Road, Bangalore  for Rs.1,500/-', 10, 110);
+    // doc.text('(Rupees One Thousand Five Hundred  Only) towards onetime payment of College Registration.', 10, 120);
+
+    // doc.text('Receipt No: 7849  Dtd: 27/11/2018 for Rs.1,500/- is enclosed.', 10, 130);
+
+    // doc.text('Participation of students in Red Cross activities promotes understanding ', 10, 140);
+    // doc.text('and accepting of civic responsibility and maintaining a spirit of friendliness.', 10, 150);
+
+    // doc.text('Thanking you,', 10, 160);
+
+    // doc.text('Yours truly,', 10, 170);
+    // doc.text('General Secretary', 10, 180);
+
+    // doc.save(form.value.v_clg_name + '-' + form.value.v_ac_year + '.pdf');
+
+    // this.router.navigateByUrl('reports', {skipLocationChange: true})
+    //   .then(() => this.router.navigate(['reports/district-wise']));
   }
 
   reset() {

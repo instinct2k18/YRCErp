@@ -6,7 +6,6 @@ import { map } from 'rxjs/operators';
 import { Voucher } from './voucher.model';
 
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -28,6 +27,9 @@ export class VoucherService {
             fee: voucher.fee,
             financial_year: voucher.financial_year,
             academic_year: voucher.academic_year,
+            received_date: voucher.received_date,
+            bank_details: voucher.bank_details,
+            student_count: voucher.student_count
           };
         });
       }))
