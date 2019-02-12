@@ -148,5 +148,14 @@ export class DistrictCollectionComponent implements OnInit, OnDestroy {
     if (this.finYearSub) {
       this.finYearSub.unsubscribe();
     }
+    if (this.incHeadSub) {
+      this.incHeadSub.unsubscribe();
+    }
+    if (this.districtSub) {
+      this.districtSub.unsubscribe();
+    }
+    if (this.collectionSub) {
+      this.collectionSub.unsubscribe();
+    }
   }
 }

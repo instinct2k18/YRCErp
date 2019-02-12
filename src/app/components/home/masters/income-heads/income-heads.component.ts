@@ -31,6 +31,9 @@ export class IncomeHeadsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    if (this.incomeHeadSub) {
+      this.incomeHeadSub.unsubscribe();
+    }
   }
 
   onAddIncomeHead(form: NgForm) {

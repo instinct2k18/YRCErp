@@ -12,7 +12,6 @@ import { AcademicYear } from '../../masters/academic-year/academic-year.model';
 import { FinancialYearService } from '../../masters/financial-year/financial-year.service';
 import { AcademicYearService } from '../../masters/academic-year/academic-year.service';
 
-// JsPdf Dependency
 import { IncomeHeads } from '../../masters/income-heads/income-heads.model';
 import { IncomeHeadsService } from '../../masters/income-heads/income-heads.service';
 import { Router } from '@angular/router';
@@ -39,7 +38,7 @@ class FormData2 {
   current_date = null;
   received_date = null;
   bank_details = null;
-  fee = null;
+  sfee = null;
   student_count = null;
 }
 
@@ -172,7 +171,6 @@ export class DistrictWiseComponent implements OnInit , OnDestroy {
 
   onSelectDistrict(event) {
     this.districtId = event.target['value'];
-    console.log(this.districtId);
     this.college = [];
     this.collegeService.getCollege();
     this.collegeSub = this.collegeService.getCollegeUpdatedListener()
@@ -183,7 +181,6 @@ export class DistrictWiseComponent implements OnInit , OnDestroy {
           }
         });
       });
-      console.log(this.college);
     this.distFlag = true;
   }
 
@@ -205,11 +202,9 @@ export class DistrictWiseComponent implements OnInit , OnDestroy {
       if (v.college_name === this.collegeId) {
         this.incHead.forEach((ih) => {
           if (v.income_head === ih.id && ih.income_head.toLowerCase() === 'college registration fee') {
-            console.log('college has paid registration fee');
             this.paid = true;
             this.notPaid = false;
           } else {
-            console.log('college has not paid registration fee');
             this.notPaid = true;
           }
         });
@@ -243,22 +238,16 @@ export class DistrictWiseComponent implements OnInit , OnDestroy {
   }
 
   onGenerateForm(form: NgForm) {
-    // received date, fee amount, voucher number, receipt number, receipt enclosed date, college name & address
-    // if student reg fee then student count
     const date = Date();
     this.form1Data.current_date = this.form2Data.current_date =
     this.form3Data.current_date = this.form4Data.current_date = this.datePipe.transform(date, 'dd/MM/yyyy');
 
     if (this.formType === 'form1') {
-      console.log(this.report);
-      console.log('form1 selected');
-
       this.report.forEach((doc => {
         this.form1Data.bank_details = doc.bank_details;
         this.form1Data.received_date = doc.received_date;
         this.form1Data.voucher_no = doc.voucher_no;
       }));
-
 
       this.pdfService.form1(
         this.form1Data.collegeName, this.form1Data.clgAddr, this.form1Data.yrc_reg_no, this.form1Data.voucher_no,
@@ -266,16 +255,51 @@ export class DistrictWiseComponent implements OnInit , OnDestroy {
         );
       this.reset();
     } else if (this.formType === 'form2') {
-      console.log('form2 selected');
-      this.pdfService.form2();
+      this.report.forEach((doc) => {
+        this.incHead.forEach(ih => {
+          if (doc.income_head === ih.id && ih.income_head.toLowerCase() === 'student membership fee') {
+            this.form2Data.bank_details = doc.bank_details;
+            this.form2Data.received_date = doc.received_date;
+            this.form2Data.voucher_no = doc.voucher_no;
+            this.form2Data.student_count = doc.student_count;
+            this.form2Data.sfee = doc.fee;
+          }
+        });
+      });
+      this.pdfService.form2(
+        this.form2Data.collegeName, this.form2Data.clgAddr, this.form2Data.yrc_reg_no, this.form2Data.voucher_no,
+        this.form2Data.current_date, this.form2Data.received_date, this.form2Data.bank_details,
+        this.form2Data.student_count, this.form2Data.sfee
+      );
       this.reset();
     } else if (this.formType === 'form3') {
-      console.log('form3 selected');
-      this.pdfService.form3();
+      this.report.forEach((doc => {
+        this.form3Data.bank_details = doc.bank_details;
+        this.form3Data.received_date = doc.received_date;
+        this.form3Data.voucher_no = doc.voucher_no;
+        this.form3Data.student_count = doc.student_count;
+        this.form3Data.fee = doc.fee;
+      }));
+
+      this.pdfService.form3(
+        this.form3Data.collegeName, this.form3Data.clgAddr, this.form3Data.yrc_reg_no, this.form3Data.voucher_no,
+        this.form3Data.current_date, this.form3Data.received_date, this.form3Data.bank_details,
+        this.form3Data.student_count, this.form3Data.fee
+      );
       this.reset();
     } else if (this.formType === 'form4') {
-      console.log('form4 selected');
-      this.pdfService.form4();
+      this.report.forEach((doc => {
+        this.form4Data.bank_details = doc.bank_details;
+        this.form4Data.received_date = doc.received_date;
+        this.form4Data.voucher_no = doc.voucher_no;
+        this.form4Data.student_count = doc.student_count;
+        this.form4Data.fee = doc.fee;
+      }));
+      this.pdfService.form4(
+        this.form4Data.collegeName, this.form4Data.clgAddr, this.form4Data.yrc_reg_no, this.form4Data.voucher_no,
+        this.form4Data.current_date, this.form4Data.received_date, this.form4Data.bank_details,
+        this.form4Data.student_count, this.form4Data.fee
+      );
       this.reset();
     }
   }
@@ -303,6 +327,9 @@ export class DistrictWiseComponent implements OnInit , OnDestroy {
     }
     if (this.finYearSub) {
       this.finYearSub.unsubscribe();
+    }
+    if (this.reportSub) {
+      this.reportSub.unsubscribe();
     }
   }
 }

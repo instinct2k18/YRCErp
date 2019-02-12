@@ -136,6 +136,12 @@ export class CollegeCollectionComponent implements OnInit, OnDestroy {
     if (this.finYearSub) {
       this.finYearSub.unsubscribe();
     }
+    if (this.incHeadSub) {
+      this.incHeadSub.unsubscribe();
+    }
+    if (this.collectionSub) {
+      this.collectionSub.unsubscribe();
+    }
   }
 
 }

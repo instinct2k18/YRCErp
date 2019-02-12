@@ -28,6 +28,9 @@
     <div *ngIf="acFlag && iHFlag;else not_paid" class="form-group">
       <p *ngFor="let iH of iHList" class="yes" >{{iH}}</p>
     </div>
+    <div *ngIf="acFlag && !paid" class="form-group">
+      <p class="no">College has not registered to YRC</p>
+    </div>
     <ng-template #not_paid>
       <div *ngIf="acFlag" class="form-group">
         <p *ngIf="!iHFlag" class="no" >College has not paid any fee</p>

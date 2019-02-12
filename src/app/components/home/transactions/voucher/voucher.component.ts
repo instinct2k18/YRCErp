@@ -90,10 +90,18 @@ export class VoucherComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.collegeSub.unsubscribe();
-    this.incomeHeadSub.unsubscribe();
-    this.finYearSub.unsubscribe();
-    this.acYearSub.unsubscribe();
+    if (this.collegeSub) {
+      this.collegeSub.unsubscribe();
+    }
+    if (this.incomeHeadSub) {
+      this.incomeHeadSub.unsubscribe();
+    }
+    if (this.finYearSub) {
+      this.finYearSub.unsubscribe();
+    }
+    if (this.acYearSub) {
+      this.acYearSub.unsubscribe();
+    }
   }
 
   onSelectCollege(event) {

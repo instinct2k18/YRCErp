@@ -58,9 +58,15 @@ export class CollegeComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.finYearSub.unsubscribe();
-    this.universitySub.unsubscribe();
-    this.districtSub.unsubscribe();
+    if (this.finYearSub) {
+      this.finYearSub.unsubscribe();
+    }
+    if (this.universitySub) {
+      this.universitySub.unsubscribe();
+    }
+    if (this.districtSub) {
+      this.districtSub.unsubscribe();
+    }
   }
 
   onAddCollege(form: NgForm) {

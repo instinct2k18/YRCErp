@@ -101,11 +101,20 @@ export class ReceiptsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.collegeSub.unsubscribe();
-    this.finYearSub.unsubscribe();
-    this.acYearSub.unsubscribe();
+    if (this.collegeSub) {
+      this.collegeSub.unsubscribe();
+    }
+    if (this.finYearSub) {
+      this.finYearSub.unsubscribe();
+    }
+    if (this.acYearSub) {
+      this.acYearSub.unsubscribe();
+    }
     if (this.receiptSub) {
       this.receiptSub.unsubscribe();
+    }
+    if (this.incHeadSub) {
+      this.incHeadSub.unsubscribe();
     }
   }
 }
