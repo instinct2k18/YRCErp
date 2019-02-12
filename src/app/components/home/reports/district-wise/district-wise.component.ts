@@ -13,10 +13,59 @@ import { FinancialYearService } from '../../masters/financial-year/financial-yea
 import { AcademicYearService } from '../../masters/academic-year/academic-year.service';
 
 // JsPdf Dependency
-import * as jsPdf from 'jspdf';
 import { IncomeHeads } from '../../masters/income-heads/income-heads.model';
 import { IncomeHeadsService } from '../../masters/income-heads/income-heads.service';
 import { Router } from '@angular/router';
+import { Reports } from '../reports.model';
+import { ReportsService } from '../reports.service';
+import { PdfgenerateService } from '../pdfgenerate.service';
+import { DatePipe } from '@angular/common';
+
+class FormData1 {
+  collegeName = null;
+  clgAddr = null;
+  yrc_reg_no = null;
+  voucher_no = null;
+  current_date = null;
+  received_date = null;
+  bank_details = null;
+}
+
+class FormData2 {
+  collegeName = null;
+  clgAddr = null;
+  yrc_reg_no = null;
+  voucher_no = null;
+  current_date = null;
+  received_date = null;
+  bank_details = null;
+  fee = null;
+  student_count = null;
+}
+
+class FormData3 {
+  collegeName = null;
+  clgAddr = null;
+  yrc_reg_no = null;
+  voucher_no = null;
+  current_date = null;
+  received_date = null;
+  bank_details = null;
+  fee = null;
+  student_count = null;
+}
+
+class FormData4 {
+  collegeName = null;
+  clgAddr = null;
+  yrc_reg_no = null;
+  voucher_no = null;
+  current_date = null;
+  received_date = null;
+  bank_details = null;
+  fee = null;
+  student_count = null;
+}
 
 @Component({
   selector: 'app-district-wise',
@@ -25,13 +74,17 @@ import { Router } from '@angular/router';
 })
 export class DistrictWiseComponent implements OnInit , OnDestroy {
 
+  form1Data = new FormData1 ;
+  form2Data = new FormData2 ;
+  form3Data = new FormData3 ;
+  form4Data = new FormData4 ;
+
   distFlag = false;
   clgFlag = false;
   finFlag = false;
   acFlag = false;
   iHFlag = false;
 
-  clgAddr = null;
   formType = null;
   districtId = null;
   collegeId = null;
@@ -58,6 +111,9 @@ export class DistrictWiseComponent implements OnInit , OnDestroy {
   incHead: IncomeHeads[] = [];
   private incHeadSub: Subscription;
 
+  report: Reports[] = [];
+  private reportSub: Subscription;
+
   iHList = [];
 
   paid = false;
@@ -70,6 +126,9 @@ export class DistrictWiseComponent implements OnInit , OnDestroy {
     public finYearService: FinancialYearService,
     public acYearService: AcademicYearService,
     public incHeadService: IncomeHeadsService,
+    public reportService: ReportsService,
+    public pdfService: PdfgenerateService,
+    private datePipe: DatePipe,
     public router: Router
   ) { }
 
@@ -158,7 +217,10 @@ export class DistrictWiseComponent implements OnInit , OnDestroy {
       if (v.college_name === this.collegeId && v.financial_year === this.finYearId && v.academic_year === this.acYearId) {
         this.college.forEach((clg) => {
           if (clg.id === this.collegeId) {
-            this.clgAddr = clg.address;
+            this.form1Data.clgAddr = this.form2Data.clgAddr = this.form3Data.clgAddr = this.form4Data.clgAddr = clg.address;
+            this.form1Data.yrc_reg_no = this.form2Data.yrc_reg_no = this.form3Data.yrc_reg_no = this.form4Data.yrc_reg_no = clg.yrc_reg_no;
+            this.form1Data.collegeName = this.form2Data.collegeName =
+            this.form3Data.collegeName = this.form4Data.collegeName  = clg.college_name;
           }
         });
         this.incHead.forEach((i) => {
@@ -173,66 +235,49 @@ export class DistrictWiseComponent implements OnInit , OnDestroy {
 
   onSelectFormType(event) {
     this.formType = event.target['value'];
+    this.reportService.generateReports(this.collegeId, this.acYearId, this.finYearId);
+    this.reportSub = this.reportService.getReportsUpdatedListener()
+      .subscribe((report) => {
+        this.report = report;
+      });
   }
 
   onGenerateForm(form: NgForm) {
     // received date, fee amount, voucher number, receipt number, receipt enclosed date, college name & address
     // if student reg fee then student count
-
-    if (this.paid === true) {
-      console.log('*********registration fee paid*********');
-    } else {
-      console.log('*********registration fee not paid*********');
-    }
+    const date = Date();
+    this.form1Data.current_date = this.form2Data.current_date =
+    this.form3Data.current_date = this.form4Data.current_date = this.datePipe.transform(date, 'dd/MM/yyyy');
 
     if (this.formType === 'form1') {
-
+      console.log(this.report);
       console.log('form1 selected');
 
+      this.report.forEach((doc => {
+        this.form1Data.bank_details = doc.bank_details;
+        this.form1Data.received_date = doc.received_date;
+        this.form1Data.voucher_no = doc.voucher_no;
+      }));
+
+
+      this.pdfService.form1(
+        this.form1Data.collegeName, this.form1Data.clgAddr, this.form1Data.yrc_reg_no, this.form1Data.voucher_no,
+        this.form1Data.current_date, this.form1Data.received_date, this.form1Data.bank_details
+        );
+      this.reset();
     } else if (this.formType === 'form2') {
-
       console.log('form2 selected');
-
+      this.pdfService.form2();
+      this.reset();
     } else if (this.formType === 'form3') {
-
       console.log('form3 selected');
-
+      this.pdfService.form3();
+      this.reset();
     } else if (this.formType === 'form4') {
-
       console.log('form4 selected');
-
+      this.pdfService.form4();
+      this.reset();
     }
-    // const doc = new jsPdf();
-    // // Header Part
-    // doc.text('The Principal', 10, 10);
-    // doc.text(form.value.v_clg_name, 10, 20);
-    // doc.text(this.clgAddr, 10, 30);
-
-    // // Letter
-    // doc.text('Dear Sir / Madam', 10, 50);
-
-    // doc.text('Sub:-Registration of Youth Red Cross', 10, 60);
-    // doc.text('Ref:-Your Letter No:Nil Dt: Nil', 10, 70);
-    // doc.text('***********', 10, 80);
-
-    // doc.text('We acknowledge with thanks the receipt of Bank Draft/ChequeNo:151840', 10, 100);
-    // doc.text('Dtd: 16/11/18, Bank of  Baroda, New BEL Road, Bangalore  for Rs.1,500/-', 10, 110);
-    // doc.text('(Rupees One Thousand Five Hundred  Only) towards onetime payment of College Registration.', 10, 120);
-
-    // doc.text('Receipt No: 7849  Dtd: 27/11/2018 for Rs.1,500/- is enclosed.', 10, 130);
-
-    // doc.text('Participation of students in Red Cross activities promotes understanding ', 10, 140);
-    // doc.text('and accepting of civic responsibility and maintaining a spirit of friendliness.', 10, 150);
-
-    // doc.text('Thanking you,', 10, 160);
-
-    // doc.text('Yours truly,', 10, 170);
-    // doc.text('General Secretary', 10, 180);
-
-    // doc.save(form.value.v_clg_name + '-' + form.value.v_ac_year + '.pdf');
-
-    // this.router.navigateByUrl('reports', {skipLocationChange: true})
-    //   .then(() => this.router.navigate(['reports/district-wise']));
   }
 
   reset() {
