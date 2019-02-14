@@ -31,7 +31,8 @@ export class CollectionsService {
             ac_year: coll.academic_year,
             fn_year: coll.financial_year,
             student_count: parseFloat(coll.student_count),
-            received_date: coll.received_date
+            receipt_no: coll.receipt_no,
+            receipt_date: coll.receipt_enclosed_date
           };
         });
       }))

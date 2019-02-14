@@ -1,12 +1,12 @@
   <div class="text-center mt-4">
     <form class="form-signin" (submit)="onLogin(adminForm)" #adminForm="ngForm">
-      <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+      <h1 class="h3 mb-3 font-weight-normal">Admin Login</h1>
       <div class="form-group">
         <label for="username" class="sr-only">Username:</label>
         <input #username="ngModel" type="username" class="form-control" name="username" placeholder="Username" id="username"
           ngModel required autofocus>
         <div *ngIf="username.touched">
-          <div *ngIf="username.errors?.required" class="alert alert-danger mt-2">Username Is Required</div>
+          <div *ngIf="username.errors" class="alert alert-danger mt-2">Username Is Required</div>
         </div>
       </div>
       <div class="form-group">
@@ -14,7 +14,7 @@
         <input type="password" #password="ngModel" class="form-control" name="password" id="password" placeholder="Password"
           ngModel required>
         <div *ngIf="password.touched">
-          <div *ngIf="password.errors?.required" class="alert alert-danger">Password Is Required</div>
+          <div *ngIf="password.errors" class="alert alert-danger">Password Is Required</div>
         </div>
       </div>
       <button type="submit" class="btn btn-primary" [disabled]="adminForm.invalid">Submit</button>

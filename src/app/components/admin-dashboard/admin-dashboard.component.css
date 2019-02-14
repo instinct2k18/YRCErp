@@ -1,0 +1,18 @@
+#ico
+{
+    width: 50%;
+    height: 50%;
+}
+
+#act
+{
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+
+
+}
+
+#act:hover {
+  text-decoration: none;
+}

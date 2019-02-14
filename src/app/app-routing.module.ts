@@ -9,6 +9,7 @@ import { ReceiptsComponent } from './components/home/transactions/receipts/recei
 import { VoucherComponent } from './components/home/transactions/voucher/voucher.component';
 
 import { AdminComponent } from './components/auth/admin/admin.component';
+import { ClerkComponent } from './components/auth/clerk/clerk.component';
 import { MastersComponent } from './components/home/masters/masters.component';
 import { AcademicYearComponent } from './components/home/masters/academic-year/academic-year.component';
 import { CollegeComponent } from './components/home/masters/college/college.component';
@@ -26,11 +27,15 @@ import { CollectionsComponent } from './components/home/collections/collections.
 import { DistrictCollectionComponent } from './components/home/collections/district-collection/district-collection.component';
 import { UniversityCollectionComponent } from './components/home/collections/university-collection/university-collection.component';
 import { CollegeCollectionComponent } from './components/home/collections/college-collection/college-collection.component';
+import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
+import { AboutComponent } from './components/about/about.component';
 
 import { AuthGuard } from './components/auth/auth.guard';
 
 const routes: Routes = [
-  {path: '', component: AdminComponent},
+  {path: '', component: ClerkComponent},
+  {path: 'admin', component: AdminComponent},
+  {path: 'admin/dashboard', component: AdminDashboardComponent},
   {path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   {path: 'masters', component: MastersComponent, canActivate: [AuthGuard] },
   {path: 'reports', component: ReportsComponent, canActivate: [AuthGuard] },
@@ -49,6 +54,7 @@ const routes: Routes = [
   {path: 'collections/college-collection', component: CollegeCollectionComponent, canActivate: [AuthGuard]},
   {path: 'collections/district-collection', component: DistrictCollectionComponent, canActivate: [AuthGuard]},
   {path: 'collections/university-collection', component: UniversityCollectionComponent, canActivate: [AuthGuard]},
+  {path: 'about', component: AboutComponent, canActivate: [AuthGuard]},
   {path: '', redirectTo: '/home', pathMatch: 'full'}
 ];
 
@@ -80,5 +86,8 @@ export const ModulesList = [
   CollectionsComponent,
   DistrictCollectionComponent,
   UniversityCollectionComponent,
-  CollegeCollectionComponent
+  CollegeCollectionComponent,
+  AboutComponent,
+  ClerkComponent,
+  AdminDashboardComponent
 ];

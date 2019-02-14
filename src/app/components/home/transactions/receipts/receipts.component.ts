@@ -11,6 +11,7 @@ import { ReceiptsService } from './receipts.service';
 import { Receipts } from './receipts.model';
 import { IncomeHeads } from '../../masters/income-heads/income-heads.model';
 import { IncomeHeadsService } from '../../masters/income-heads/income-heads.service';
+import { PdfgenerateService } from '../../reports/pdfgenerate.service';
 
 @Component({
   selector: 'app-receipts',
@@ -45,7 +46,8 @@ export class ReceiptsComponent implements OnInit, OnDestroy {
     public finYearService: FinancialYearService,
     public acYearService: AcademicYearService,
     public receiptService: ReceiptsService,
-    public incHeadService: IncomeHeadsService
+    public incHeadService: IncomeHeadsService,
+    public pdfService: PdfgenerateService
   ) { }
 
   ngOnInit() {
@@ -98,6 +100,7 @@ export class ReceiptsComponent implements OnInit, OnDestroy {
     .subscribe((receipt) => {
       this.receipts = receipt;
       });
+    this.pdfService.generateReceipt();
   }
 
   ngOnDestroy() {

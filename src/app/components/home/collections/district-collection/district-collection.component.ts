@@ -105,7 +105,7 @@ export class DistrictCollectionComponent implements OnInit, OnDestroy {
         this.updateCollection(this.collection);
         this.excelService.exportAsExcelFile(this.collection, 'test');
       });
-      this.reset();
+      // this.reset();
   }
 
   reset() {
