@@ -27,10 +27,10 @@ export class ReceiptsService {
       .pipe(map((receiptData) => {
         return receiptData.data.map(receipt => {
           return {
-
             clg_name: receipt.c_name,
             address: receipt.addr,
             fees: receipt.fees,
+            voucher_no: receipt.voucher_no,
             income_head: receipt.income_head,
             received_date: receipt.received_date,
             bank_details: receipt.bank_details,

@@ -4,6 +4,7 @@ import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 
 import { AuthData } from './auth-data.model';
+import { Roles } from './roles.model';
 
 
 @Injectable({
@@ -12,6 +13,7 @@ import { AuthData } from './auth-data.model';
 export class AuthService {
 
   private isAuthenticated = false;
+  private roles: string;
   private token: string;
   private tokenTimer: NodeJS.Timer;
   private authStatusListener = new Subject<boolean>();
@@ -24,6 +26,10 @@ export class AuthService {
 
   getIsAuth() {
     return this.isAuthenticated;
+  }
+
+  getRole() {
+    return this.roles;
   }
 
   getAuthStatusListener() {
@@ -40,7 +46,7 @@ export class AuthService {
 
   login(username: string, password: string) {
     const authData: AuthData = {username: username, password: password};
-    this.http.post<{token: string, expiresIn: number}>('http://localhost:3000/api/user/login', authData)
+    this.http.post<{roles: string, token: string, expiresIn: number}>('http://localhost:3000/api/user/login', authData)
       .subscribe(response => {
         const token = response.token;
         this.token = token;
@@ -48,12 +54,16 @@ export class AuthService {
           const expiresIn = response.expiresIn;
           this.setAuthTimer(expiresIn);
           this.isAuthenticated = true;
+          this.roles = response.roles;
           this.authStatusListener.next(true);
           const currentDate = new Date();
           const expirationDate = new Date(currentDate.getTime() + expiresIn * 10000 );
-          this.saveAuthData(token, expirationDate);
-          // alert('Logged in successfully');
-          this.router.navigate(['home']);
+          this.saveAuthData(token, expirationDate, this.roles);
+          if (this.roles === Roles.Clerk) {
+            this.router.navigate(['home']);
+          } else if (this.roles === Roles.Admin) {
+            this.router.navigate(['admin/dashboard']);
+          }
         }
       });
   }
@@ -70,7 +80,12 @@ export class AuthService {
       this.isAuthenticated = true;
       this.setAuthTimer(expiresIn / 1000);
       this.authStatusListener.next(true);
-      this.router.navigate(['/home']);
+      this.roles = authInformation.roles;
+      if (this.roles === Roles.Admin) {
+        this.router.navigate(['/admin/dashboard']);
+      } else if (this.roles === Roles.Clerk) {
+        this.router.navigate(['/home']);
+      }
     }
   }
 
@@ -89,7 +104,8 @@ export class AuthService {
     }, duration * 1000);
   }
 
-  private saveAuthData(token: string, expirationDate: Date) {
+  private saveAuthData(token: string, expirationDate: Date, roles: string) {
+    localStorage.setItem('roles', roles);
     localStorage.setItem('token', token );
     localStorage.setItem('expiration', expirationDate.toISOString());
   }
@@ -97,17 +113,20 @@ export class AuthService {
   private clearAuthData() {
     localStorage.removeItem('token');
     localStorage.removeItem('expiration');
+    localStorage.removeItem('roles');
   }
 
   private getAuthData() {
     const token = localStorage.getItem('token');
     const expirationDate = localStorage.getItem('expiration');
+    const roles = localStorage.getItem('roles');
     if (!token || !expirationDate) {
       return;
     }
     return {
       token: token,
-      expirationDate: new Date(expirationDate)
+      expirationDate: new Date(expirationDate),
+      roles: roles
     };
   }
 }

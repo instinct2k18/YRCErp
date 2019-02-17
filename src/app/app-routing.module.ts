@@ -8,7 +8,6 @@ import { TransactionsComponent } from './components/home/transactions/transactio
 import { ReceiptsComponent } from './components/home/transactions/receipts/receipts.component';
 import { VoucherComponent } from './components/home/transactions/voucher/voucher.component';
 
-import { AdminComponent } from './components/auth/admin/admin.component';
 import { ClerkComponent } from './components/auth/clerk/clerk.component';
 import { MastersComponent } from './components/home/masters/masters.component';
 import { AcademicYearComponent } from './components/home/masters/academic-year/academic-year.component';
@@ -27,34 +26,53 @@ import { CollectionsComponent } from './components/home/collections/collections.
 import { DistrictCollectionComponent } from './components/home/collections/district-collection/district-collection.component';
 import { UniversityCollectionComponent } from './components/home/collections/university-collection/university-collection.component';
 import { CollegeCollectionComponent } from './components/home/collections/college-collection/college-collection.component';
-import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { AboutComponent } from './components/about/about.component';
 
+import { AdminComponent } from './components/auth/admin/admin.component';
+import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
+import { MastersEditComponent } from './components/admin-dashboard/masters-edit/masters-edit.component';
+import { MastersDeleteComponent } from './components/admin-dashboard/masters-delete/masters-delete.component';
+import { UpdateAffiliationComponent } from './components/admin-dashboard/update-affiliation/update-affiliation.component';
+
+import { Roles } from './components/auth/roles.model';
 import { AuthGuard } from './components/auth/auth.guard';
 
 const routes: Routes = [
   {path: '', component: ClerkComponent},
-  {path: 'admin', component: AdminComponent},
-  {path: 'admin/dashboard', component: AdminDashboardComponent},
-  {path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
-  {path: 'masters', component: MastersComponent, canActivate: [AuthGuard] },
-  {path: 'reports', component: ReportsComponent, canActivate: [AuthGuard] },
-  {path: 'collections', component: CollectionsComponent, canActivate: [AuthGuard] },
-  {path: 'transactions', component: TransactionsComponent, canActivate: [AuthGuard] },
-  {path: 'transactions/receipts', component: ReceiptsComponent, canActivate: [AuthGuard] },
-  {path: 'transactions/vouchers', component: VoucherComponent, canActivate: [AuthGuard] },
-  {path: 'masters/academic_year', component: AcademicYearComponent, canActivate: [AuthGuard] },
-  {path: 'masters/college', component: CollegeComponent, canActivate: [AuthGuard] },
-  {path: 'masters/district', component: DistrictComponent, canActivate: [AuthGuard] },
-  {path: 'masters/financial_year', component: FinancialYearComponent, canActivate: [AuthGuard] },
-  {path: 'masters/income_heads', component: IncomeHeadsComponent, canActivate: [AuthGuard] },
-  {path: 'masters/university', component: UniversityComponent, canActivate: [AuthGuard] },
-  {path: 'reports/district-wise', component: DistrictWiseComponent, canActivate: [AuthGuard]},
-  {path: 'reports/university-wise', component: UniversityWiseComponent, canActivate: [AuthGuard]},
-  {path: 'collections/college-collection', component: CollegeCollectionComponent, canActivate: [AuthGuard]},
-  {path: 'collections/district-collection', component: DistrictCollectionComponent, canActivate: [AuthGuard]},
-  {path: 'collections/university-collection', component: UniversityCollectionComponent, canActivate: [AuthGuard]},
+  {path: 'home', component: HomeComponent, canActivate: [AuthGuard], data: { role: [Roles.Clerk] } },
+  {path: 'masters', component: MastersComponent, canActivate: [AuthGuard], data: { role: [Roles.Clerk] } },
+  {path: 'reports', component: ReportsComponent, canActivate: [AuthGuard], data: { role: [Roles.Clerk] } },
+  {path: 'collections', component: CollectionsComponent, canActivate: [AuthGuard], data: { role: [Roles.Clerk] } },
+  {path: 'transactions', component: TransactionsComponent, canActivate: [AuthGuard], data: { role: [Roles.Clerk] } },
+  {path: 'transactions/receipts', component: ReceiptsComponent, canActivate: [AuthGuard], data: { role: [Roles.Clerk] } },
+  {path: 'transactions/vouchers', component: VoucherComponent, canActivate: [AuthGuard], data: { role: [Roles.Clerk] } },
+  {path: 'masters/academic_year', component: AcademicYearComponent, canActivate: [AuthGuard], data: { role: [Roles.Clerk] } },
+  {path: 'masters/college', component: CollegeComponent, canActivate: [AuthGuard], data: { role: [Roles.Clerk] } },
+  {path: 'masters/district', component: DistrictComponent, canActivate: [AuthGuard], data: { role: [Roles.Clerk] } },
+  {path: 'masters/financial_year', component: FinancialYearComponent, canActivate: [AuthGuard], data: { role: [Roles.Clerk] } },
+  {path: 'masters/income_heads', component: IncomeHeadsComponent, canActivate: [AuthGuard], data: { role: [Roles.Clerk] } },
+  {path: 'masters/university', component: UniversityComponent, canActivate: [AuthGuard], data: { role: [Roles.Clerk] } },
+  {path: 'reports/district-wise', component: DistrictWiseComponent, canActivate: [AuthGuard], data: { role: [Roles.Clerk] } },
+  {path: 'reports/university-wise', component: UniversityWiseComponent, canActivate: [AuthGuard], data: { role: [Roles.Clerk] } },
+  {path: 'collections/college-collection', component: CollegeCollectionComponent, canActivate: [AuthGuard], data: { role: [Roles.Clerk] } },
+  {
+    path: 'collections/district-collection',
+    component: DistrictCollectionComponent,
+    canActivate: [AuthGuard],
+    data: { role: [Roles.Clerk] }
+  },
+  {
+    path: 'collections/university-collection',
+    component: UniversityCollectionComponent,
+    canActivate: [AuthGuard],
+    data: { role: [Roles.Clerk] }
+  },
   {path: 'about', component: AboutComponent, canActivate: [AuthGuard]},
+  {path: 'admin', component: AdminComponent},
+  {path: 'admin/dashboard', component: AdminDashboardComponent, data: { role: [Roles.Admin] }},
+  {path: 'admin/dashboard/masters-edit', component: MastersEditComponent, data: { role: [Roles.Admin] }},
+  {path: 'admin/dashboard/masters-delete', component: MastersDeleteComponent, data: { role: [Roles.Admin] }},
+  {path: 'admin/dashboard/update-affiliation', component: UpdateAffiliationComponent, data: { role: [Roles.Admin] }},
   {path: '', redirectTo: '/home', pathMatch: 'full'}
 ];
 
@@ -89,5 +107,8 @@ export const ModulesList = [
   CollegeCollectionComponent,
   AboutComponent,
   ClerkComponent,
-  AdminDashboardComponent
+  AdminDashboardComponent,
+  MastersEditComponent,
+  MastersDeleteComponent,
+  UpdateAffiliationComponent
 ];

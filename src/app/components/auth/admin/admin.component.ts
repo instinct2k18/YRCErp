@@ -19,11 +19,10 @@ export class AdminComponent implements OnInit {
   }
 
   onLogin(form: NgForm) {
-    const username = form.value.username;
-    const password = form.value.password;
-    if(username === 'admin' && password === 'admin') {
-      this.router.navigate(['admin/dashboard']);
+    if (form.invalid) {
+      return;
     }
-    }
+    this.authService.login(form.value.username, form.value.password);
+  }
   }
 

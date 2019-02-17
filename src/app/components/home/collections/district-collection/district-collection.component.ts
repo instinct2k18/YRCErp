@@ -118,6 +118,12 @@ export class DistrictCollectionComponent implements OnInit, OnDestroy {
         this.college.forEach((clg) => {
           if (clg.id === c.college_name) {
             c.college_name = clg.college_name;
+            c.college_address = clg.address;
+            this.district.forEach((d) => {
+              if (d.id === clg.district) {
+                c.college_district = d.district_name;
+              }
+            });
           }
         });
         this.incHead.forEach((iH) => {

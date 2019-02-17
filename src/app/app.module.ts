@@ -9,7 +9,6 @@ import { AuthInterceptor } from './components/auth/auth-interceptor';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { DatePipe } from '@angular/common';
 
-
 @NgModule({
   declarations: [
     AppComponent,

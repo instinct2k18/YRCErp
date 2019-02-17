@@ -12,6 +12,7 @@ import { Receipts } from './receipts.model';
 import { IncomeHeads } from '../../masters/income-heads/income-heads.model';
 import { IncomeHeadsService } from '../../masters/income-heads/income-heads.service';
 import { PdfgenerateService } from '../../reports/pdfgenerate.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-receipts',
@@ -47,6 +48,7 @@ export class ReceiptsComponent implements OnInit, OnDestroy {
     public acYearService: AcademicYearService,
     public receiptService: ReceiptsService,
     public incHeadService: IncomeHeadsService,
+    private datePipe: DatePipe,
     public pdfService: PdfgenerateService
   ) { }
 
@@ -100,7 +102,27 @@ export class ReceiptsComponent implements OnInit, OnDestroy {
     .subscribe((receipt) => {
       this.receipts = receipt;
       });
-    this.pdfService.generateReceipt();
+
+    const date = Date();
+    const currentDate = this.datePipe.transform(date, 'dd/MM/yyyy');
+    let voucher_no = null;
+    let received_date = null;
+    let bankDetails = null;
+    let student_count = null;
+    let fee = null;
+    let clg_name = null;
+    let clg_address = null;
+
+    this.receipts.forEach((receipt) => {
+      voucher_no = receipt.voucher_no;
+      received_date = receipt.received_date;
+      bankDetails = receipt.bank_details;
+      student_count = receipt.student_count;
+      fee = receipt.fees;
+      clg_name = receipt.clg_name;
+      clg_address = receipt.address;
+    });
+    this.pdfService.generateReceipt(currentDate, voucher_no, received_date, bankDetails, student_count, fee, clg_name, clg_address);
   }
 
   ngOnDestroy() {

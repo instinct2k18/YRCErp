@@ -15,6 +15,8 @@ import { UniversityService } from '../../masters/university/university.service';
 import { College } from '../../masters/college/college.model';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { DistrictService } from '../../masters/district/district.service';
+import { District } from '../../masters/district/district.model';
 
 @Component({
   selector: 'app-university-collection',
@@ -48,6 +50,9 @@ export class UniversityCollectionComponent implements OnInit, OnDestroy {
   collection: Collections[] = [];
   private collectionSub: Subscription;
 
+  district: District[] = [];
+  private districtSub: Subscription;
+
   constructor(
     public collegeService: CollegeService,
     public universityService: UniversityService,
@@ -55,6 +60,7 @@ export class UniversityCollectionComponent implements OnInit, OnDestroy {
     public acYearService: AcademicYearService,
     public collectionService: CollectionsService,
     public incHeadService: IncomeHeadsService,
+    public districtService: DistrictService,
     private excelService: ExcelService,
     private router: Router
   ) { }
@@ -64,6 +70,11 @@ export class UniversityCollectionComponent implements OnInit, OnDestroy {
     this.collegeSub = this.collegeService.getCollegeUpdatedListener()
       .subscribe((clg) => {
         this.college = clg;
+      });
+    this.districtService.getDistrict();
+    this.districtSub = this.districtService.getDistrictUpdatedListener()
+      .subscribe((dist) => {
+        this.district = dist;
       });
     this.universityService.getUniversity();
     this.universitySub = this.universityService.getUniversityUpdatedListener()
@@ -118,6 +129,12 @@ export class UniversityCollectionComponent implements OnInit, OnDestroy {
         this.college.forEach((clg) => {
           if (clg.id === c.college_name) {
             c.college_name = clg.college_name;
+            c.college_address = clg.address;
+            this.district.forEach((d) => {
+              if (d.id === clg.district) {
+                c.college_district = d.district_name;
+              }
+            });
           }
         });
         this.incHead.forEach((iH) => {
@@ -156,6 +173,9 @@ export class UniversityCollectionComponent implements OnInit, OnDestroy {
     }
     if (this.collectionSub) {
       this.collectionSub.unsubscribe();
+    }
+    if (this.districtSub) {
+      this.districtSub.unsubscribe();
     }
   }
 }

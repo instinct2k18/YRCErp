@@ -23,7 +23,6 @@ import { DatePipe } from '@angular/common';
 class FormData1 {
   collegeName = null;
   clgAddr = null;
-  yrc_reg_no = null;
   voucher_no = null;
   current_date = null;
   received_date = null;
@@ -33,7 +32,6 @@ class FormData1 {
 class FormData2 {
   collegeName = null;
   clgAddr = null;
-  yrc_reg_no = null;
   voucher_no = null;
   current_date = null;
   received_date = null;
@@ -45,7 +43,6 @@ class FormData2 {
 class FormData3 {
   collegeName = null;
   clgAddr = null;
-  yrc_reg_no = null;
   voucher_no = null;
   current_date = null;
   received_date = null;
@@ -57,7 +54,6 @@ class FormData3 {
 class FormData4 {
   collegeName = null;
   clgAddr = null;
-  yrc_reg_no = null;
   voucher_no = null;
   current_date = null;
   received_date = null;
@@ -215,7 +211,6 @@ export class UniversityWiseComponent implements OnInit , OnDestroy {
         this.college.forEach((clg) => {
           if (clg.id === this.collegeId) {
             this.form1Data.clgAddr = this.form2Data.clgAddr = this.form3Data.clgAddr = this.form4Data.clgAddr = clg.address;
-            this.form1Data.yrc_reg_no = this.form2Data.yrc_reg_no = this.form3Data.yrc_reg_no = this.form4Data.yrc_reg_no = clg.yrc_reg_no;
             this.form1Data.collegeName = this.form2Data.collegeName =
             this.form3Data.collegeName = this.form4Data.collegeName  = clg.college_name;
           }
@@ -243,6 +238,11 @@ export class UniversityWiseComponent implements OnInit , OnDestroy {
     this.form1Data.current_date = this.form2Data.current_date =
     this.form3Data.current_date = this.form4Data.current_date = this.datePipe.transform(date, 'dd/MM/yyyy');
 
+    const letterNumber = form.value.let_no;
+    const letterDate = form.value.let_date;
+    const receiptNumber = form.value.rec_no;
+    const receiptDate = form.value.rec_date;
+
     if (this.formType === 'form1') {
       this.report.forEach((doc => {
         this.form1Data.bank_details = doc.bank_details;
@@ -251,8 +251,9 @@ export class UniversityWiseComponent implements OnInit , OnDestroy {
       }));
 
       this.pdfService.form1(
-        this.form1Data.collegeName, this.form1Data.clgAddr, this.form1Data.yrc_reg_no, this.form1Data.voucher_no,
-        this.form1Data.current_date, this.form1Data.received_date, this.form1Data.bank_details
+        this.form1Data.collegeName, this.form1Data.clgAddr, this.form1Data.voucher_no,
+        this.form1Data.current_date, this.form1Data.received_date, this.form1Data.bank_details, letterNumber,
+        letterDate, receiptNumber, receiptDate
         );
       this.reset();
     } else if (this.formType === 'form2') {
@@ -268,9 +269,10 @@ export class UniversityWiseComponent implements OnInit , OnDestroy {
         });
       });
       this.pdfService.form2(
-        this.form2Data.collegeName, this.form2Data.clgAddr, this.form2Data.yrc_reg_no, this.form2Data.voucher_no,
+        this.form2Data.collegeName, this.form2Data.clgAddr, this.form2Data.voucher_no,
         this.form2Data.current_date, this.form2Data.received_date, this.form2Data.bank_details,
-        this.form2Data.student_count, this.form2Data.sfee
+        this.form2Data.student_count, this.form2Data.sfee, letterNumber,
+        letterDate, receiptNumber, receiptDate
       );
       this.reset();
     } else if (this.formType === 'form3') {
@@ -283,9 +285,10 @@ export class UniversityWiseComponent implements OnInit , OnDestroy {
       }));
 
       this.pdfService.form3(
-        this.form3Data.collegeName, this.form3Data.clgAddr, this.form3Data.yrc_reg_no, this.form3Data.voucher_no,
+        this.form3Data.collegeName, this.form3Data.clgAddr, this.form3Data.voucher_no,
         this.form3Data.current_date, this.form3Data.received_date, this.form3Data.bank_details,
-        this.form3Data.student_count, this.form3Data.fee
+        this.form3Data.student_count, this.form3Data.fee, letterNumber,
+        letterDate, receiptNumber, receiptDate
       );
       this.reset();
     } else if (this.formType === 'form4') {
@@ -297,9 +300,10 @@ export class UniversityWiseComponent implements OnInit , OnDestroy {
         this.form4Data.fee = doc.fee;
       }));
       this.pdfService.form4(
-        this.form4Data.collegeName, this.form4Data.clgAddr, this.form4Data.yrc_reg_no, this.form4Data.voucher_no,
+        this.form4Data.collegeName, this.form4Data.clgAddr, this.form4Data.voucher_no,
         this.form4Data.current_date, this.form4Data.received_date, this.form4Data.bank_details,
-        this.form4Data.student_count, this.form4Data.fee
+        this.form4Data.student_count, this.form4Data.fee, letterNumber,
+        letterDate, receiptNumber, receiptDate
       );
       this.reset();
     }

@@ -1,0 +1,23 @@
+<div class="container">
+  <form (submit)="onUpdateAffiliation(updateForm)" #updateForm="ngForm">
+    <div class="form-group">
+      <label for="v_clg_name">College Name</label>
+      <select type="text" class="form-control" id="v_clg_name" name="v_clg_name" (change)="onSelectCollege($event, uni)" ngModel required>
+        <option *ngFor="let name of college" value="{{name.id}}">{{name.college_name}}</option>
+      </select>
+    </div>
+    <div class="form-group" style="display: none">
+      <label for="u_uni_name">University</label>
+      <input type="text" class="form-control" id="u_uni_name" name="u_uni_name" ngModel disabled #uni>
+    </div>
+    <div class="form-group" *ngIf="clgFlag">
+      <label for="c_uni_name">Change University To</label>
+      <select type="text" class="form-control" id="c_uni_name" name="c_uni_name" (change)="onSelectUniversity($event)" ngModel required>
+        <option *ngFor="let uni of university" value="{{uni.id}}">{{uni.university}}</option>
+      </select>
+    </div>
+    <div class="form-group" *ngIf="clgFlag">
+      <button type="submit" class="btn btn-primary">Update Affiliation</button>
+  </div>
+  </form>
+</div>

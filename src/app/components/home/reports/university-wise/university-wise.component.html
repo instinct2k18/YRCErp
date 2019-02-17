@@ -36,6 +36,22 @@
         <p *ngIf="!iHFlag" class="no" >College has not paid any fee</p>
       </div>
     </ng-template>
+    <div *ngIf="acFlag" class="form-group">
+      <label for="let_no">Letter Number</label>
+      <input type="text" class="form-control" id="let_no" name="let_no" placeholder="Enter College Letter Number" ngModel required>
+    </div>
+    <div *ngIf="acFlag" class="form-group">
+      <label for="let_date">Letter Date</label>
+      <input type="text" class="form-control" id="let_date" name="let_date" placeholder="Enter Letter Date" ngModel required>
+    </div>
+    <div *ngIf="acFlag" class="form-group">
+      <label for="rec_no">Receipt Number</label>
+      <input type="text" class="form-control" id="rec_no" name="rec_no" placeholder="Enter Receipt Number" ngModel required>
+    </div>
+    <div *ngIf="acFlag" class="form-group">
+      <label for="rec_date">Receipt Date</label>
+      <input type="text" class="form-control" id="rec_date" name="rec_date" placeholder="Enter Receipt Date" ngModel required>
+    </div>
     <div *ngIf="acFlag" class="form-check form-group form-check-inline">
       <input class="form-check-input" type="radio" name="formtype" id="inlineRadio1" value="form1" (change)="onSelectFormType($event)">
       <label class="form-check-label" for="inlineRadio1">Form Type 1</label>
