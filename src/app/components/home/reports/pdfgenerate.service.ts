@@ -13,31 +13,16 @@ export class PdfgenerateService {
       return (address.slice(Math.max(address.length - 5, 1)));
   }
 
-  commaSeparatedValueForRupees(money) {
-    let csv = '-/';
-    let itr = 0;
-    for(let i = money.length; i > -1; i--)
-    {
-      itr++;
-      if(itr <= 3)
+  csv(x) {
+      x = x.toString();
+      let lastThree = x.substring(x.length - 3);
+      const otherNumbers = x.substring(0, x.length - 3);
+      if (otherNumbers !== '')
       {
-        csv += money[i];
+          lastThree = ',' + lastThree;
       }
-      if(itr === 4)
-      {
-        csv += ',' + money[i];
-      }
-      if(itr % 2 !== 0 )
-      {
-        csv += ',' + money[i];
-      }
-      else
-      {
-        csv += money[i];
-      }
-    }
-    let end = csv.split('').reverse().join('');
-    return end;
+      const res = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ',') + lastThree;
+      return (res + '/-') ;
   }
 
   splitCollegeAddress(address) {
@@ -79,66 +64,63 @@ form1(clg_name, clgAddr, voucher_no, current_date, received_date, bank_details,
   const letterno = letterNumber; // college letter number add new field
   const dateref = letterDate; // letter date  add new field
 
-  const save_name = clg_name + "_" +current_date;
+  const save_name = clg_name + '_' + current_date;
 
   const doc = new jsPdf();
 
   doc.setFontSize(13);
   // doc.setFont("");
 
-  doc.fromHTML('The Principal,', 26, 50);
+  doc.fromHTML('The Principal,', 26, 65);
 
-  doc.fromHTML(clg_name + ',' , 26, 55);
+  doc.fromHTML(clg_name + ',' , 26, 70);
   if(address[0] !== undefined)
   {
-    doc.fromHTML(address[0] + ',' , 26, 60);
+    doc.fromHTML(address[0] + ',' , 26, 75);
   }
   if(address[1] !== undefined)
   {
-    doc.fromHTML(address[1] + ',' , 26, 65);
+    doc.fromHTML(address[1] + ',' , 26, 80);
   }
   if(address[2] !== undefined)
   {
-    doc.fromHTML(address[2] + ',' , 26, 70);
+    doc.fromHTML(address[2] + ',' , 26, 90);
   }
   if(address[3] !== undefined)
   {
-    doc.fromHTML(address[3] + ',' , 26, 75);
+    doc.fromHTML(address[3] + ',' , 26, 90);
   }
 
-  doc.fromHTML('Dear Sir/Madam, ', 26, 85);
+  doc.fromHTML('Dear Sir/Madam, ', 26, 100);
 
-  doc.fromHTML('<b>Sub</b>:- Registration of Youth Red Cross', 57, 95);
+  doc.fromHTML('<b>Sub</b>:- Registration of Youth Red Cross', 57, 110);
   // check this----
-  if(letterno)
-  {
-    doc.fromHTML('<b>Ref</b>:- Your Letter No: <b>' + letterno , 57, 100);
+  if (letterno) {
+    doc.fromHTML('<b>Ref</b>:- Your Letter No: <b>' + letterno , 57, 115);
+  } else {
+    doc.fromHTML('<b>Ref</b>:- Your Letter No:', 57, 115);
   }
-  else
-  {
-    doc.fromHTML('<b>Ref</b>:- Your Letter No:', 57, 100);
-  }
-  doc.fromHTML('<b>Date</b>:- ' + dateref, 57, 105);
+  doc.fromHTML('<b>Date</b>:- ' + dateref, 57, 120);
   // --------------
-  doc.fromHTML('<sup>**********</sup>', 3.5 * 26 + 4, 110);
+  doc.fromHTML('<sup>**********</sup>', 3.5 * 26 + 4, 125);
 
-  doc.fromHTML('We acknowledge with thanks the receipt of <b>Bank Draft / Cheque No: ' + bankdraftOrCheckno + '</b> Dated:', 35, 115);
-  doc.fromHTML('<b>' + bankdate + '</b>,  <b>' + bankdetails + '</b>', 26, 120);
-  doc.fromHTML('for <b>Rs.1,500/- (Rupees One Thousand Five Hundred Only) </b>towards onetime payment of ', 26, 125);
-  doc.fromHTML('College Registration.', 26, 130);
+  doc.fromHTML('We acknowledge with thanks the receipt of <b>Bank Draft / Cheque No: ' + bankdraftOrCheckno + '</b> Dated:', 35, 130);
+  doc.fromHTML('<b>' + bankdate + '</b>,  <b>' + bankdetails + '</b>', 26, 135);
+  doc.fromHTML('for <b>Rs.1,500/- (Rupees One Thousand Five Hundred Only) </b>towards onetime payment of ', 26, 140);
+  doc.fromHTML('College Registration.', 26, 145);
 
-  doc.fromHTML('Receipt No: ' + receiptNumber + ' Dated:' + receiptDate + ' for Rs.1,500/- is enclosed.', 35, 140);
+  doc.fromHTML('Receipt No: ' + receiptNumber + ' Dated:' + receiptDate + ' for Rs.1,500/- is enclosed.', 35, 155);
 
   // doc.fromHTML('Receipt No:' + receiptNumber, 35, 140);
   // doc.fromHTML('Dated:' + receiptDate, 80, 140);
   // doc.fromHTML('for Rs.1,500/- is enclosed.', 120, 140);
 
-  doc.fromHTML('Participation of students in Red Cross activities promotes understanding and accepting', 35, 150);
-  doc.fromHTML('of civic responsibilities and maintaining a spirit of friendliness.', 26, 155);
+  doc.fromHTML('Participation of students in Red Cross activities promotes understanding and accepting', 35, 165);
+  doc.fromHTML('of civic responsibilities and maintaining a spirit of friendliness.', 26, 170);
 
-  doc.fromHTML('Thanking you, ', 37, 165);
-  doc.fromHTML('Yours truly, ', 26 * 5.75 + 6, 175);
-  doc.fromHTML('<b>General Secretary</b>', 26 * 5.75, 195);
+  doc.fromHTML('Thanking you, ', 37, 180);
+  doc.fromHTML('Yours truly, ', 26 * 5.75 + 6, 190);
+  doc.fromHTML('<b>General Secretary</b>', 26 * 5.75, 210);
 
   doc.save(save_name + '.pdf');
 }
@@ -185,13 +167,14 @@ form1(clg_name, clgAddr, voucher_no, current_date, received_date, bank_details,
     doc.fromHTML('<b>Ref</b>:- Your Letter No: <b>' + letterno + '</b> Date: <b>' + dateref + '</b>', 57, 100);
     doc.fromHTML('<sup>**********</sup>', 3.5 * 26 + 4, 105);
 
-    doc.fromHTML('We acknowledge with thanks the receipt of D.D/Cheque for Rs.1, 500/- <b>(Rupees One</b>', 35, 110);
+    doc.fromHTML('We acknowledge with thanks the receipt of D.D/Cheque for Rs.1,500/- <b>(Rupees One</b>', 35, 110);
     doc.fromHTML('<b>Thousand Five Hundred Only)</b> being the onetime payment of College Registration Fee', 26, 115);
-    doc.fromHTML('and ' + stdno + ' Students membership Fee 30% of Rs. ' + money + '/- (Total Rs: ' + total + '/- )', 26, 120);
+    doc.fromHTML('and ' + stdno + ' Students membership Fee 30% of Rs. '
+    + this.csv(money) + '/- (Total Rs: ' + this.csv(total) + ' )', 26, 120);
 
     doc.fromHTML('Receipt No:', 35, 130);
     doc.fromHTML('Dated:', 80, 130);
-    doc.fromHTML('for Rs.' + total + '/- is enclosed.', 120, 130);
+    doc.fromHTML('for Rs.' + this.csv(total) + ' is enclosed.', 120, 130);
 
     doc.fromHTML('On behalf of Indian Red Cross Society,  Karnataka State Branch,  I thank you for your', 35, 135);
     doc.fromHTML('kind co-operation,  I request you to continue your co-operation in enrolling more number of', 26, 140);
@@ -205,7 +188,7 @@ form1(clg_name, clgAddr, voucher_no, current_date, received_date, bank_details,
     doc.fromHTML('Yours truly, ', 26 * 5.75 + 6, 180);
     doc.fromHTML('<b>General Secretary</b>', 26 * 5.75, 200);
 
-    doc.save(clg_name + '-' + current_date + '.pdf');
+    doc.save(clg_name + '_' + current_date + '.pdf');
 
   }
 
@@ -232,7 +215,7 @@ form1(clg_name, clgAddr, voucher_no, current_date, received_date, bank_details,
     {
       doc.fromHTML(address[0] + ',' , 26, 60);
     }
-    if(address[1] !== undefined)
+    if (address[1] !== undefined)
     {
       doc.fromHTML(address[1] + ',' , 26, 65);
     }
@@ -254,7 +237,7 @@ form1(clg_name, clgAddr, voucher_no, current_date, received_date, bank_details,
 
     doc.fromHTML('We acknowledge with thanks the receipt of <b>Bank Draft / Cheque No: ' + bankdraftOrCheckno + '</b> Dated:', 35, 110);
     doc.fromHTML('<b>' + bankdate + '</b>,  <b>' + bankdetails + '</b>', 26, 115);
-    doc.fromHTML('for <b>Rs.' + money + '/- ' + money2text + ' </b> towards 30% membership contribution from ' +
+    doc.fromHTML('for <b>Rs.' + this.csv(money) + ' ' + money2text + ' </b> towards 30% membership contribution from ' +
     noStd + ' students. ', 26, 120);
 
     doc.fromHTML('Receipt No:', 35, 130);
@@ -268,7 +251,7 @@ form1(clg_name, clgAddr, voucher_no, current_date, received_date, bank_details,
     doc.fromHTML('Yours truly, ', 26 * 5.75 + 6, 165);
     doc.fromHTML('<b>General Secretary</b>', 26 * 5.75, 185);
 
-    doc.save(clg_name + '-' + current_date + '.pdf');
+    doc.save(clg_name + '_' + current_date + '.pdf');
   }
 
   form4(clg_name, clgAddr, voucher_no, current_date, received_date, bank_details,
@@ -320,11 +303,11 @@ form1(clg_name, clgAddr, voucher_no, current_date, received_date, bank_details,
     doc.fromHTML('We acknowledge with thanks the receipt of <b>Bank Draft / Cheque No: ' + bankdraftOrCheckno + '</b> Dated:', 35, 110);
     doc.fromHTML('<b>' + bankdate + '</b>,  <b>' + bankdetails + '</b>', 26, 115);
     // call csv function on money
-    doc.fromHTML('for <b>Rs.' + money + ' ' + money2text + ' </b> towards 30% membership contribution from ' + noStd +
+    doc.fromHTML('for <b>Rs.' + this.csv(money) + ' ' + money2text + ' </b> towards 30% membership contribution from ' + noStd +
       ' Students. ', 26, 120);
     doc.fromHTML('Receipt No:', 35, 130);
     doc.fromHTML('Dated:', 80, 130);
-    doc.fromHTML('for Rs.' + actual_money + ' is enclosed.', 120, 130);
+    doc.fromHTML('for Rs.' + this.csv(actual_money) + ' is enclosed.', 120, 130);
 
     doc.fromHTML('So far your College has not enrolled in the youth Red Cross wing. Therefore,  I request', 35, 140);
     doc.fromHTML('you kindly to register your college by paying one-time payment of Rs.1, 500/- as per', 26, 145);
@@ -391,13 +374,13 @@ form1(clg_name, clgAddr, voucher_no, current_date, received_date, bank_details,
       doc.fromHTML(report_address[3], x * 4 + 2, y + 5);
     }
 
-    doc.fromHTML('the sum of Rupees ' + sumOfRupees + ' Check/ Bank Draft towards one-time payment of Youth' , x, y + 10);
+    doc.fromHTML('the sum of Rupees ' + this.csv(sumOfRupees) + ' Check/ Bank Draft towards one-time payment of Youth' , x, y + 10);
     doc.fromHTML('Red Cross College Registration fee ' + regFee + ' x ' + numStd + ' 30% student membership Fee', x, y + 15);
     doc.fromHTML(bankno + ' Dated ' + bankdate + ' ' + bnkNamenAddress, x, y + 20);
     // doc.fromHTML('overflow', x, y + 25);
 
     // TOTAL
-    doc.fromHTML('<b>Rs.</b> ' + total, x , y + 67 );
-    doc.save(clg_name +'-' + cur_date +'.pdf');
+    doc.fromHTML('<b>Rs.</b> ' + this.csv(total), x , y + 67 );
+    doc.save(clg_name + '-' + cur_date + '.pdf');
   }
 }

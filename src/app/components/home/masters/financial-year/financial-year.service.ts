@@ -49,4 +49,21 @@ export class FinancialYearService {
         console.log(resposnseData.message);
       });
   }
+
+  deleteFinancialYear(financialYearId) {
+    const url = `${BACKEND_URL}/financial_year/delete?${financialYearId}`;
+    this.http.delete<{ message: string }>(url)
+      .subscribe(res => {
+        console.log(res.message);
+      });
+  }
+
+  updateFinancialYear(financial_year: FinancialYear) {
+    this.http.put<{ message: string }>(
+      BACKEND_URL + '/financial_year/edit', financial_year)
+      .subscribe(res => {
+        console.log(res.message);
+      });
+  }
+
 }

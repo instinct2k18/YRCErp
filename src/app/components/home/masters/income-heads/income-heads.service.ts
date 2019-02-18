@@ -45,4 +45,12 @@ export class IncomeHeadsService {
         console.log(resposnseData.message);
       });
   }
+
+  deleteIncomeHead(incomeheadId) {
+    const url = `${BACKEND_URL}/income_heads/delete?${incomeheadId}`;
+    this.http.delete<{ message: string }>(url)
+      .subscribe(res => {
+        console.log(res.message);
+      });
+  }
 }

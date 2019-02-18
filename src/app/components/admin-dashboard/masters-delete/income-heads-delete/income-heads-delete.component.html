@@ -1,3 +1,17 @@
-<p>
-  income-heads-delete works!
-</p>
+<div class="container">
+  <form (submit)="onDeleteIncomeHead(incomeheadForm)" #incomeheadForm="ngForm">
+    <div class="form-group">
+      <label  for="v_ac_year">Income Heads</label>
+      <select type="text" class="form-control" id="v_ac_year" name="v_ac_year" (change)="onSelectIncomeHead($event)" ngModel required>
+        <option *ngFor="let income of incomeHead" value="{{income.id}}">{{income.income_head}}</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Delete Income Heads</button>
+    <div *ngIf="deleted" class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 10px">
+      Deleted successfully.
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </form>
+</div>

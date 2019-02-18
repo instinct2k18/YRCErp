@@ -1,3 +1,17 @@
-<p>
-  district-delete works!
-</p>
+<div class="container">
+  <form (submit)="onDeleteDistrict(districtForm)" #districtForm="ngForm">
+    <div class="form-group">
+      <label  for="dist">District</label>
+      <select type="text" class="form-control" id="dist" name="dist" (change)="onSelectDistrict($event)" ngModel required>
+        <option *ngFor="let d of dist" value="{{d.id}}">{{d.district_name}}</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Delete Financial Year</button>
+    <div *ngIf="deleted" class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 10px">
+      Deleted successfully.
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </form>
+</div>

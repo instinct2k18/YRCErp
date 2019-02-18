@@ -45,4 +45,12 @@ export class DistrictService {
         console.log(resposnseData.message);
       });
   }
+
+  deleteDistrict(districtId) {
+    const url = `${BACKEND_URL}/district/delete?${districtId}`;
+    this.http.delete<{ message: string }>(url)
+      .subscribe(res => {
+        console.log(res.message);
+      });
+  }
 }

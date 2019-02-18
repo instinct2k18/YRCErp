@@ -53,4 +53,13 @@ export class CollegeService {
         console.log(resposnseData.message);
       });
   }
+
+  deleteCollege(collegeId) {
+    const url = `${BACKEND_URL}/college/delete?${collegeId}`;
+    this.http.delete<{ message: string }>(url)
+      .subscribe(res => {
+        console.log(res.message);
+      });
+  }
+
 }

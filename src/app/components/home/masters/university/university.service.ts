@@ -48,4 +48,12 @@ export class UniversityService {
         console.log(resposnseData.message);
       });
   }
+
+  deleteUniversity(universityId) {
+    const url = `${BACKEND_URL}/university/delete?${universityId}`;
+    this.http.delete<{ message: string }>(url)
+      .subscribe(res => {
+        console.log(res.message);
+      });
+  }
 }

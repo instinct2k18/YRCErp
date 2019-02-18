@@ -1,3 +1,17 @@
-<p>
-  financial-year-delete works!
-</p>
+<div class="container">
+  <form (submit)="onDeleteFinancialYear(financialYearForm)" #financialYearForm="ngForm">
+    <div class="form-group">
+      <label  for="v_fc_year">Financial Year</label>
+      <select type="text" class="form-control" id="v_fc_year" name="v_fc_year" (change)="onSelectFcYear($event)" ngModel required>
+        <option *ngFor="let fyear of fcYear" value="{{fyear.id}}">{{fyear.year}}</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Delete Financial Year</button>
+    <div *ngIf="deleted" class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 10px">
+      Deleted successfully.
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </form>
+</div>

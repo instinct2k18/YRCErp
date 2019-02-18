@@ -1,3 +1,21 @@
-<p>
-  financial-year-edit works!
-</p>
+<div class="container">
+    <form (submit)="onUpdateFinancialYear(financialYearForm)" #financialYearForm="ngForm">
+      <div class="form-group">
+        <label  for="v_ac_year">Financial Year</label>
+        <select type="text" class="form-control" id="v_ac_year" name="v_ac_year" (change)="onSelectFnYear($event)" ngModel required>
+          <option *ngFor="let year of fYear" value="{{year.id}}">{{year.year}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="financial_year">Year</label>
+        <input type="text" class="form-control" id="financial_year" name="financial_year" value="{{fYearFieldValue}}" placeholder="Enter Year" ngModel required>
+      </div>
+      <button type="submit" class="btn btn-primary">Update Financial Year</button>
+    <div *ngIf="updated" class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 10px">
+      Updated successfully.
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    </form>
+  </div>
