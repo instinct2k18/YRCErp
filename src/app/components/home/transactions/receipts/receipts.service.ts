@@ -4,6 +4,9 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
 import { Receipts } from './receipts.model';
+import { environment } from 'src/environments/environment';
+
+const BACKEND_URL = environment.apiUrl;
 
 
 @Injectable({
@@ -20,7 +23,7 @@ export class ReceiptsService {
   }
 
   generateReceipt(recptNo, recptEncDate, clgId, acYearId, fnYearId, incHdId, notFirst) {
-    const url = 'http://localhost:3000/api/receipts?' +
+    const url = BACKEND_URL + '/receipts?' +
     'recptNo=' + recptNo + '&recptEncDate=' + recptEncDate + '&clgId=' + clgId +
     '&acYearId=' + acYearId + '&fnYearId=' + fnYearId + '&incHdId=' + incHdId + '&notFirst=' + notFirst;
     this.http.get<{message: string; data: any}>(url)

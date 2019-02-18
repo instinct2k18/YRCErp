@@ -191,7 +191,7 @@ form1(clg_name, clgAddr, voucher_no, current_date, received_date, bank_details,
 
     doc.fromHTML('Receipt No:', 35, 130);
     doc.fromHTML('Dated:', 80, 130);
-    doc.fromHTML('for Rs.1, 500/- is enclosed.', 120, 130);
+    doc.fromHTML('for Rs.' + total + '/- is enclosed.', 120, 130);
 
     doc.fromHTML('On behalf of Indian Red Cross Society,  Karnataka State Branch,  I thank you for your', 35, 135);
     doc.fromHTML('kind co-operation,  I request you to continue your co-operation in enrolling more number of', 26, 140);
@@ -319,7 +319,7 @@ form1(clg_name, clgAddr, voucher_no, current_date, received_date, bank_details,
 
     doc.fromHTML('We acknowledge with thanks the receipt of <b>Bank Draft / Cheque No: ' + bankdraftOrCheckno + '</b> Dated:', 35, 110);
     doc.fromHTML('<b>' + bankdate + '</b>,  <b>' + bankdetails + '</b>', 26, 115);
-    //call csv function on money
+    // call csv function on money
     doc.fromHTML('for <b>Rs.' + money + ' ' + money2text + ' </b> towards 30% membership contribution from ' + noStd +
       ' Students. ', 26, 120);
     doc.fromHTML('Receipt No:', 35, 130);
@@ -380,12 +380,10 @@ form1(clg_name, clgAddr, voucher_no, current_date, received_date, bank_details,
 
     doc.fromHTML('Received with thanks from The Principal, ' + report_address[0] , x, y); // 16
 
-    if(report_address[1] !== undefined)
-    {
+    if (report_address[1] !== undefined) {
       doc.fromHTML(report_address[1], x * 4, y);
     }
-    if(report_address[2] !== undefined)
-    {
+    if (report_address[2] !== undefined) {
       doc.fromHTML(report_address[2], x, y + 5);
     }
     if(report_address[3] !== undefined)

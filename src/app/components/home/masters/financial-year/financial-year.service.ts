@@ -3,8 +3,10 @@ import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
-
 import { FinancialYear } from './financial-year.model';
+import { environment } from 'src/environments/environment';
+
+const BACKEND_URL = environment.apiUrl;
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +20,7 @@ export class FinancialYearService {
   getFinYear() {
     this.http
       .get<{ message: string; finYear: any }>(
-        'http://localhost:3000/api/financial_year'
+        BACKEND_URL + '/financial_year'
       )
       .pipe(map((finYearData) => {
         return finYearData.finYear.map(finYear => {
@@ -42,7 +44,7 @@ export class FinancialYearService {
     const financialYear: FinancialYear = { id: null, year: financial_year };
     this.finYear.push(financialYear);
     this.finYearSubject.next([...this.finYear]);
-    this.http.post<{message: string}>('http://localhost:3000/api/financial_year', financialYear)
+    this.http.post<{message: string}>(BACKEND_URL + '/financial_year', financialYear)
       .subscribe((resposnseData) => {
         console.log(resposnseData.message);
       });

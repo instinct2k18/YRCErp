@@ -7,7 +7,9 @@ import { University } from '../../home/masters/university/university.model';
 import { NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
+const BACKEND_URL = environment.apiUrl;
 @Component({
   selector: 'app-update-affiliation',
   templateUrl: './update-affiliation.component.html',
@@ -70,7 +72,7 @@ export class UpdateAffiliationComponent implements OnInit, OnDestroy {
   }
 
   onUpdateAffiliation(form: NgForm) {
-    const url = 'http://localhost:3000/api/update-affiliation?' +
+    const url = BACKEND_URL + '/update-affiliation?' +
     'clgId=' + this.collegeId + '&old_affId=' + this.currentUniId + '&new_affId=' + this.universityId;
     this.http.get<{message: string}>(url)
       .subscribe((resposnseData) => {

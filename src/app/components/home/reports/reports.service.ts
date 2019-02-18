@@ -3,6 +3,9 @@ import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Reports } from './reports.model';
+import { environment } from 'src/environments/environment';
+
+const BACKEND_URL = environment.apiUrl;
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +22,7 @@ export class ReportsService {
   }
 
   generateReports(collegeId, acYearId, fYearId) {
-    const url = 'http://localhost:3000/api/reports?' + 'collegeId=' + collegeId + '&acYearId=' + acYearId + '&fYearId=' + fYearId;
+    const url = BACKEND_URL + '/reports?' + 'collegeId=' + collegeId + '&acYearId=' + acYearId + '&fYearId=' + fYearId;
     this.http.get<{message: string; reports: any}>(url)
       .pipe(map((reportData) => {
         return reportData.reports.map(report => {

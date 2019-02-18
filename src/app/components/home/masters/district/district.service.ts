@@ -4,6 +4,9 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
 import { District } from './district.model';
+import { environment } from 'src/environments/environment';
+
+const BACKEND_URL = environment.apiUrl;
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +18,7 @@ export class DistrictService {
   constructor(private http: HttpClient) { }
 
   getDistrict() {
-    this.http.get<{message: string; district: any}>('http://localhost:3000/api/district')
+    this.http.get<{message: string; district: any}>(BACKEND_URL + '/district')
       .pipe(map((districtData) => {
         return districtData.district.map(district => {
           return {
@@ -37,7 +40,7 @@ export class DistrictService {
   addDistrict(district: District) {
     this.district.push(district);
     this.districtSubject.next([...this.district]);
-    this.http.post<{message: string}>('http://localhost:3000/api/district', district)
+    this.http.post<{message: string}>(BACKEND_URL + '/district', district)
       .subscribe((resposnseData) => {
         console.log(resposnseData.message);
       });

@@ -230,6 +230,7 @@ export class DistrictWiseComponent implements OnInit , OnDestroy {
       .subscribe((report) => {
         this.report = report;
       });
+    console.log(this.report);
   }
 
   onGenerateForm(form: NgForm) {

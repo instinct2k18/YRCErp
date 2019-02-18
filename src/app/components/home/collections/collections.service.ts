@@ -3,6 +3,9 @@ import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Collections } from './collections.model';
+import { environment } from 'src/environments/environment';
+
+const BACKEND_URL = environment.apiUrl;
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +22,7 @@ export class CollectionsService {
   }
 
   generateCollegeCollections(collegeId, fromAcId, toAcId, fromFnId, toFnId) {
-    const url = 'http://localhost:3000/api/collection?' +
+    const url = BACKEND_URL + '/collection?' +
     'collegeId=' + collegeId + '&fromAcId=' + fromAcId + '&toAcId=' + toAcId + '&fromFnId=' + fromFnId + '&toFnId=' + toFnId;
     this.http.get<{message: string; collections: any}>(url)
       .pipe(map((collection) => {
@@ -43,7 +46,7 @@ export class CollectionsService {
   }
 
   generateDistrictCollection(distId, fromAcId, toAcId, fromFnId, toFnId) {
-    const url = 'http://localhost:3000/api/collection?' +
+    const url = BACKEND_URL + '/collection?' +
     'distId=' + distId + '&fromAcId=' + fromAcId + '&toAcId=' + toAcId + '&fromFnId=' + fromFnId + '&toFnId=' + toFnId;
     this.http.get<{message: string; collections: any}>(url)
       .pipe(map((collection) => {
@@ -66,7 +69,7 @@ export class CollectionsService {
   }
 
   generateUniversityCollection(univId, fromAcId, toAcId, fromFnId, toFnId) {
-    const url = 'http://localhost:3000/api/collection?' +
+    const url = BACKEND_URL + '/collection?' +
     'univId=' + univId + '&fromAcId=' + fromAcId + '&toAcId=' + toAcId + '&fromFnId=' + fromFnId + '&toFnId=' + toFnId;
     this.http.get<{message: string; collections: any}>(url)
       .pipe(map((collection) => {

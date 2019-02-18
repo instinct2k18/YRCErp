@@ -4,6 +4,9 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
 import { College } from './college.model';
+import { environment } from 'src/environments/environment';
+
+const BACKEND_URL = environment.apiUrl;
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +18,7 @@ export class CollegeService {
   constructor(private http: HttpClient) { }
 
   getCollege() {
-    this.http.get<{message: string; college: any}>('http://localhost:3000/api/college')
+    this.http.get<{message: string; college: any}>(BACKEND_URL + '/college')
       .pipe(map((collegeData) => {
         return collegeData.college.map(college => {
           return {
@@ -45,7 +48,7 @@ export class CollegeService {
   addCollege(college: College) {
     this.college.push(college);
     this.collegeSubject.next([...this.college]);
-    this.http.post<{message: string}>('http://localhost:3000/api/college', college)
+    this.http.post<{message: string}>(BACKEND_URL + '/college', college)
       .subscribe((resposnseData) => {
         console.log(resposnseData.message);
       });

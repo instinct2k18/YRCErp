@@ -4,6 +4,9 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
 import { Voucher } from './voucher.model';
+import { environment } from 'src/environments/environment';
+
+const BACKEND_URL = environment.apiUrl;
 
 
 @Injectable({
@@ -16,7 +19,7 @@ export class VoucherService {
   constructor(private http: HttpClient) { }
 
   getVoucher() {
-    this.http.get<{message: string; voucher: any}>('http://localhost:3000/api/voucher')
+    this.http.get<{message: string; voucher: any}>(BACKEND_URL + '/voucher')
       .pipe(map((voucherData) => {
         return voucherData.voucher.map(voucher => {
           return {
@@ -46,7 +49,7 @@ export class VoucherService {
   addVoucher(voucher: Voucher) {
     this.voucher.push(voucher);
     this.voucherSubject.next([...this.voucher]);
-    this.http.post<{message: string}>('http://localhost:3000/api/voucher', voucher)
+    this.http.post<{message: string}>(BACKEND_URL + '/voucher', voucher)
       .subscribe((resposnseData) => {
         console.log(resposnseData.message);
       });

@@ -33,6 +33,23 @@ import { AdminDashboardComponent } from './components/admin-dashboard/admin-dash
 import { MastersEditComponent } from './components/admin-dashboard/masters-edit/masters-edit.component';
 import { MastersDeleteComponent } from './components/admin-dashboard/masters-delete/masters-delete.component';
 import { UpdateAffiliationComponent } from './components/admin-dashboard/update-affiliation/update-affiliation.component';
+import {
+  AcademicYearDeleteComponent
+} from './components/admin-dashboard/masters-delete/academic-year-delete/academic-year-delete.component';
+import { CollegeDeleteComponent } from './components/admin-dashboard/masters-delete/college-delete/college-delete.component';
+import { DistrictDeleteComponent } from './components/admin-dashboard/masters-delete/district-delete/district-delete.component';
+import {
+  FinancialYearDeleteComponent
+} from './components/admin-dashboard/masters-delete/financial-year-delete/financial-year-delete.component';
+import { IncomeHeadsDeleteComponent } from './components/admin-dashboard/masters-delete/income-heads-delete/income-heads-delete.component';
+import { UniversityDeleteComponent } from './components/admin-dashboard/masters-delete/university-delete/university-delete.component';
+import { AcademicYearEditComponent } from './components/admin-dashboard/masters-edit/academic-year-edit/academic-year-edit.component';
+import { CollegeEditComponent } from './components/admin-dashboard/masters-edit/college-edit/college-edit.component';
+import { DistrictEditComponent } from './components/admin-dashboard/masters-edit/district-edit/district-edit.component';
+import { FinancialYearEditComponent } from './components/admin-dashboard/masters-edit/financial-year-edit/financial-year-edit.component';
+import { IncomeHeadsEditComponent } from './components/admin-dashboard/masters-edit/income-heads-edit/income-heads-edit.component';
+import { UniversityEditComponent } from './components/admin-dashboard/masters-edit/university-edit/university-edit.component';
+
 
 import { Roles } from './components/auth/roles.model';
 import { AuthGuard } from './components/auth/auth.guard';
@@ -110,5 +127,17 @@ export const ModulesList = [
   AdminDashboardComponent,
   MastersEditComponent,
   MastersDeleteComponent,
-  UpdateAffiliationComponent
+  UpdateAffiliationComponent,
+  AcademicYearDeleteComponent,
+  CollegeDeleteComponent,
+  DistrictDeleteComponent,
+  FinancialYearDeleteComponent,
+  IncomeHeadsDeleteComponent,
+  UniversityDeleteComponent,
+  AcademicYearEditComponent,
+  CollegeEditComponent,
+  DistrictEditComponent,
+  FinancialYearEditComponent,
+  IncomeHeadsEditComponent,
+  UniversityEditComponent
 ];

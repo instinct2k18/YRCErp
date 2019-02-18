@@ -4,6 +4,9 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
 import { IncomeHeads } from './income-heads.model';
+import { environment } from 'src/environments/environment';
+
+const BACKEND_URL = environment.apiUrl;
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +18,7 @@ export class IncomeHeadsService {
   constructor(private http: HttpClient) { }
 
   getIncomeHeads() {
-    this.http.get<{message: string; incomeHead: any}>('http://localhost:3000/api/income_heads')
+    this.http.get<{message: string; incomeHead: any}>(BACKEND_URL + '/income_heads')
       .pipe(map((incomeHeadsData) => {
         return incomeHeadsData.incomeHead.map(incomeHeads => {
           return {
@@ -37,7 +40,7 @@ export class IncomeHeadsService {
   addIncomeHeads(incomeHeads: IncomeHeads) {
     this.incomeHeads.push(incomeHeads);
     this.incomeHeadsSubject.next([...this.incomeHeads]);
-    this.http.post<{message: string}>('http://localhost:3000/api/income_heads', incomeHeads)
+    this.http.post<{message: string}>(BACKEND_URL + '/income_heads', incomeHeads)
       .subscribe((resposnseData) => {
         console.log(resposnseData.message);
       });

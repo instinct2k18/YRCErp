@@ -4,6 +4,9 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
 import { AcademicYear } from './academic-year.model';
+import { environment } from 'src/environments/environment';
+
+const BACKEND_URL = environment.apiUrl;
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +20,7 @@ export class AcademicYearService {
   getAcademicYear() {
     this.http
       .get<{ message: string; academicYear: any }>(
-        'http://localhost:3000/api/academic_year'
+        BACKEND_URL + '/academic_year'
       )
       .pipe(map((academicYearData) => {
         return academicYearData.academicYear.map(academicYear => {
@@ -38,7 +41,7 @@ export class AcademicYearService {
   }
 
   addAcademicYear(academic_year: AcademicYear) {
-    this.http.post<{message: string, id: string}>('http://localhost:3000/api/academic_year', academic_year)
+    this.http.post<{message: string, id: string}>(BACKEND_URL + '/academic_year', academic_year)
       .subscribe((resposnseData) => {
         academic_year.id = resposnseData.id;
         this.academicYear.push(academic_year);
