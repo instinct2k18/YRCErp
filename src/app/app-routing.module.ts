@@ -17,7 +17,6 @@ import { FinancialYearComponent } from './components/home/masters/financial-year
 import { IncomeHeadsComponent } from './components/home/masters/income-heads/income-heads.component';
 import { UniversityComponent } from './components/home/masters/university/university.component';
 
-
 import { ReportsComponent } from './components/home/reports/reports.component';
 import { UniversityWiseComponent } from './components/home/reports/university-wise/university-wise.component';
 import { DistrictWiseComponent } from './components/home/reports/district-wise/district-wise.component';
@@ -90,6 +89,18 @@ const routes: Routes = [
   {path: 'admin/dashboard/masters-edit', component: MastersEditComponent, data: { role: [Roles.Admin] }},
   {path: 'admin/dashboard/masters-delete', component: MastersDeleteComponent, data: { role: [Roles.Admin] }},
   {path: 'admin/dashboard/update-affiliation', component: UpdateAffiliationComponent, data: { role: [Roles.Admin] }},
+  {path: 'admin/dashboard/delete/academic-year', component: AcademicYearDeleteComponent, data: { role: [Roles.Admin] }},
+  {path: 'admin/dashboard/delete/college', component: CollegeDeleteComponent, data: { role: [Roles.Admin] }},
+  {path: 'admin/dashboard/delete/district', component: DistrictDeleteComponent, data: { role: [Roles.Admin] }},
+  {path: 'admin/dashboard/delete/financial-year', component: FinancialYearDeleteComponent, data: { role: [Roles.Admin] }},
+  {path: 'admin/dashboard/delete/income-heads', component: IncomeHeadsDeleteComponent, data: { role: [Roles.Admin] }},
+  {path: 'admin/dashboard/delete/university', component: UniversityDeleteComponent, data: { role: [Roles.Admin] }},
+  {path: 'admin/dashboard/edit/academic-year', component: AcademicYearEditComponent, data: { role: [Roles.Admin] }},
+  {path: 'admin/dashboard/edit/college', component: CollegeEditComponent, data: { role: [Roles.Admin] }},
+  {path: 'admin/dashboard/edit/district', component: DistrictEditComponent, data: { role: [Roles.Admin] }},
+  {path: 'admin/dashboard/edit/financial-year', component: FinancialYearEditComponent, data: { role: [Roles.Admin] }},
+  {path: 'admin/dashboard/edit/income-heads', component: IncomeHeadsEditComponent, data: { role: [Roles.Admin] }},
+  {path: 'admin/dashboard/edit/university', component: UniversityEditComponent, data: { role: [Roles.Admin] }},
   {path: '', redirectTo: '/home', pathMatch: 'full'}
 ];
 
