@@ -1,3 +1,62 @@
-<p>
-  college-edit works!
-</p>
+<div class="container">
+  <form (submit)="onUpdateCollege(collegeForm)" #collegeForm="ngForm">
+    <div class="form-group">
+      <label for="v_clg_name">Select College Name</label>
+      <select type="text" class="form-control" id="v_clg_name" name="v_clg_name" (change)="onSelectCollege($event)" ngModel required>
+        <option *ngFor="let name of college" value="{{name.id}}">{{name.college_name}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="yrc_reg_no">YRC Registration Number</label>
+      <input type="text" class="form-control" id="yrc_reg_no" name="yrc_reg_no" value="{{yrcRegNoField}}" placeholder="Enter YRC Registration Number" ngModel required>
+    </div>
+    <div class="form-group">
+      <label for="college_name">College Name</label>
+      <input type="text" class="form-control" id="college_name" name="college_name" value="{{clgNameField}}" placeholder="Enter College Name" ngModel required>
+    </div>
+    <div class="form-group">
+      <label for="c_address">Address</label>
+      <textarea class="form-control" id="c_address" name="c_address" rows="3" [(ngModel)]="addrField" ngModel required></textarea>
+    </div>
+    <div class="form-group">
+      <label for="program_officer">Program Officer</label>
+      <input type="text" class="form-control" id="program_officer" name="program_officer" value="{{pgmOfficerField}}" placeholder="Enter Program Officer name" ngModel required>
+    </div>
+    <div class="form-group">
+      <label for="c_contact_no">Contact Number</label>
+      <input type="text" class="form-control" id="c_contact_no" name="c_contact_no" value="{{contactNoField}}" placeholder="Enter Conntact number" ngModel required>
+    </div>
+    <div class="form-group">
+      <label for="c_emai">Email-address</label>
+      <input type="email" class="form-control" id="c_email" name="c_email" value="{{emailField}}" placeholder="Enter email" ngModel required>
+    </div>
+    <div class="form-group">
+      <label for="reg_fin_year">Registered Financial Year</label>
+      <select type="text" class="form-control" id="reg_fin_year" name="reg_fin_year" (change)="onSelectRegYear($event)" [(ngModel)]='regFinYearIdField' required>
+        <option value="{{regFinYearIdField}}" hidden>{{regFinYearField}}</option>
+        <option *ngFor="let year of finYear" value="{{year.id}}">{{year.year}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="affiliation">Affiliation</label>
+      <select type="text" class="form-control" id="affiliation" name="affiliation" (change)="onSelectUniversity($event)" [(ngModel)]='affialationIdField' required>
+        <option value="{{affialationIdField}}" hidden>{{affialationField}}</option>
+        <option *ngFor="let university of university" value="{{university.id}}">{{university.university}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="district">District</label>
+      <select type="text" class="form-control" id="district" name="district" (change)="onSelectDistrict($event)" [(ngModel)]='districtIdField' required>
+        <option value="{{districtIdField}}" hidden>{{districtField}}</option>
+        <option *ngFor="let district of district" value="{{district.id}}">{{district.district_name}}</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Add College</button>
+    <div *ngIf="updated" class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 10px">
+        Updated successfully.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+  </form>
+</div>

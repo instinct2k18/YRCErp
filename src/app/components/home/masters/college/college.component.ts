@@ -81,7 +81,6 @@ export class CollegeComponent implements OnInit, OnDestroy {
       registered_financial_year: this.regYearId,
       affiliation: this.universityId,
       district: this.districtId
-
     };
     this.collegeService.addCollege(college);
     this.added = true;

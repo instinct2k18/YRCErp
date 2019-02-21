@@ -122,7 +122,8 @@ export class ReceiptsComponent implements OnInit, OnDestroy {
       clg_name = receipt.clg_name;
       clg_address = receipt.address;
     });
-    this.pdfService.generateReceipt(currentDate, voucher_no, received_date, bankDetails, student_count, fee, clg_name, clg_address);
+    this.pdfService.generateReceipt(form.value.r_no, currentDate, voucher_no, received_date, bankDetails, student_count,
+      fee, clg_name, clg_address);
   }
 
   ngOnDestroy() {
