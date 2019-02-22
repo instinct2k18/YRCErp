@@ -87,11 +87,13 @@ export class CollegeEditComponent implements OnInit, OnDestroy {
       program_officer: form.value.program_officer,
       contact_no: form.value.c_contact_no,
       email: form.value.c_email,
-      registered_financial_year: this.regYearId,
-      affiliation: this.universityId,
-      district: this.districtId
+      registered_financial_year: form.value.reg_fin_year,
+      affiliation: form.value.affiliation,
+      district: form.value.district
     };
-    console.log(college);
+    this.collegeService.updateCollege(college);
+    this.updated = true;
+    form.reset();
   }
 
   onSelectCollege(event) {
