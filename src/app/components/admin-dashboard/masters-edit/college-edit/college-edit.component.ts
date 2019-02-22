@@ -79,7 +79,19 @@ export class CollegeEditComponent implements OnInit, OnDestroy {
   }
 
   onUpdateCollege(form: NgForm) {
-
+    const college: College = {
+      id: form.value.v_clg_name,
+      yrc_reg_no: form.value.yrc_reg_no,
+      college_name: form.value.college_name,
+      address: form.value.c_address,
+      program_officer: form.value.program_officer,
+      contact_no: form.value.c_contact_no,
+      email: form.value.c_email,
+      registered_financial_year: this.regYearId,
+      affiliation: this.universityId,
+      district: this.districtId
+    };
+    console.log(college);
   }
 
   onSelectCollege(event) {

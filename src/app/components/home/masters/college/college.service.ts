@@ -54,6 +54,14 @@ export class CollegeService {
       });
   }
 
+  updateCollege(college: College) {
+    this.http.put<{ message: string }>(
+      BACKEND_URL + '/college/edit', college)
+      .subscribe(res => {
+        console.log(res.message);
+      });
+  }
+
   deleteCollege(collegeId) {
     const url = `${BACKEND_URL}/college/delete?${collegeId}`;
     this.http.delete<{ message: string }>(url)
